@@ -548,10 +548,9 @@
             .new-hero-section {
                 padding: 80px 0;
                 background: 
-                       
-                       
+                    linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.8) 45%, rgba(255,255,255,0.6) 60%, transparent 70%),
                     url('dbanner.jpeg') right center/cover no-repeat;
-                min-height: 800px;
+                min-height: 600px;
                 display: flex;
                 align-items: center;
             }
@@ -566,8 +565,9 @@
             }
 
             .hero-form-container {
-                margin-left: auto;
+                margin-left: 50px;
                 margin-right: 0;
+                max-width: 500px;
             }
         }
 
@@ -635,13 +635,17 @@
         /* Responsive adjustments */
         @media (max-width: 1200px) {
             .hero-form-container {
-                max-width: 400px;
+                max-width: 450px;
             }
         }
 
         @media (max-width: 992px) {
             .hero-banner {
                 height: 350px;
+            }
+            
+            .new-hero-section {
+                min-height: 500px;
             }
         }
 
@@ -727,9 +731,14 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted d-none d-sm-block" href="https://iitk.ac.in/dora/annualgiving/wallofdonors.php">
-                Wall Of Donors
-            </a>
+            <div class="d-flex gap-2">
+                <a class="btn-getstarted d-none d-sm-block" href="https://iitk.ac.in/dora/annualgiving/wallofdonors.php">
+                    Wall Of Donors
+                </a>
+                <a class="btn-getstarted d-none d-sm-block" href="#donation-form">
+                    Donate Now
+                </a>
+            </div>
            
         </div>
     </header>
@@ -746,59 +755,17 @@
             <div class="hero-form-container">
                 <!-- Donation Form -->
                 <div class="donation-form-container">
-                    <!-- Tab Navigation -->
-                   
                     <!-- Step 1: Donation Impact -->
                     <div id="step1" class="form-step active">
                         <div class="step-header">
                             <h2>Choose Your Impact</h2>
-                            <p>Select donation type and amount</p>
+                            <p>Select country and donation details</p>
                         </div>
 
-                        <!-- Donation Type Toggle -->
-                        <div class="donation-type-toggle">
-                            <div class="donation-type-option active" data-type="one-time">One-time Donation</div>
-                            <div class="donation-type-option" data-type="monthly">Monthly Donation</div>
-                        </div>
-
-                        <!-- One-time Amount Options (Initially Visible) -->
-                        <div class="amount-options-simple" id="onetime-amounts">
-                            <div class="amount-option" data-amount="2500">₹2,500</div>
-                            <div class="amount-option" data-amount="5000">₹5,000</div>
-                            <div class="amount-option" data-amount="10000">₹10,000</div>
-                            <div class="other-option-box" id="onetime-other-option-box">
-                                <span class="currency-symbol">₹</span>
-                                <input type="number" id="onetime-customAmountInput" placeholder="Other" min="1">
-                            </div>
-                        </div>
-
-                        <!-- Monthly Amount Options (Initially Hidden) -->
-                        <div class="amount-options-simple" id="monthly-amounts" style="display: none;">
-                            <div class="amount-option" data-amount="500">₹500</div>
-                            <div class="amount-option" data-amount="1000">₹1,000</div>
-                            <div class="amount-option" data-amount="10000">₹10,000</div>
-                            <div class="other-option-box" id="monthly-other-option-box">
-                                <span class="currency-symbol">₹</span>
-                                <input type="number" id="monthly-customAmountInput" placeholder="Other" min="1">
-                            </div>
-                        </div>
-
-                        <!-- Selected Donation Display -->
-                        <div id="selectedDonationDisplay" class="selected-donation-display">
-                            <div class="donation-summary">
-                                <div>
-                                    <div class="donation-label">Selected Donation</div>
-                                    <div class="donation-value" id="selectedAmountDisplay">₹0</div>
-                                </div>
-                                <div class="donation-type-badge" id="selectedTypeDisplay">One-time</div>
-                            </div>
-                        </div>
-
-                        <!-- Country Selection -->
+                        <!-- Country Selection at Top -->
                         <div class="country-select-container">
-                            <h3 class="text-center" style="font-size: 16px; margin-bottom: 10px;">Select Country</h3>
                             <div class="dropdown country-dropdown">
-                                <div class="dropdown-selected">Choose Country</div>
+                                <div class="dropdown-selected">Choose Country *</div>
                                 <div class="dropdown-options">
                                     <div class="option" data-value="india">🇮🇳 India</div>
                                     <div class="option" data-value="usa">🇺🇸 United States</div>
@@ -811,19 +778,63 @@
                             </div>
                         </div>
 
-                        <div class="info-note">
-                            <strong>Note:</strong> Your donation will go towards supporting students' most urgent
-                            requirements.
+                        <!-- India Content (Initially Hidden) -->
+                        <div id="india-content" style="display: none;">
+                            <!-- Donation Type Toggle -->
+                            <div class="donation-type-toggle">
+                                <div class="donation-type-option active" data-type="one-time">One-time Donation</div>
+                                <div class="donation-type-option" data-type="monthly">Monthly Donation</div>
+                            </div>
+
+                            <!-- One-time Amount Options (Initially Visible) -->
+                            <div class="amount-options-simple" id="onetime-amounts">
+                                <div class="amount-option" data-amount="2500">₹2,500</div>
+                                <div class="amount-option" data-amount="5000">₹5,000</div>
+                                <div class="amount-option" data-amount="10000">₹10,000</div>
+                                <div class="other-option-box" id="onetime-other-option-box">
+                                    <span class="currency-symbol">₹</span>
+                                    <input type="number" id="onetime-customAmountInput" placeholder="Other" min="1">
+                                </div>
+                            </div>
+
+                            <!-- Monthly Amount Options (Initially Hidden) -->
+                            <div class="amount-options-simple" id="monthly-amounts" style="display: none;">
+                                <div class="amount-option" data-amount="500">₹500</div>
+                                <div class="amount-option" data-amount="1000">₹1,000</div>
+                                <div class="amount-option" data-amount="10000">₹10,000</div>
+                                <div class="other-option-box" id="monthly-other-option-box">
+                                    <span class="currency-symbol">₹</span>
+                                    <input type="number" id="monthly-customAmountInput" placeholder="Other" min="1">
+                                </div>
+                            </div>
+
+                            <!-- Selected Donation Display -->
+                            <div id="selectedDonationDisplay" class="selected-donation-display">
+                                <div class="donation-summary">
+                                    <div>
+                                        <div class="donation-label">Selected Donation</div>
+                                        <div class="donation-value" id="selectedAmountDisplay">₹0</div>
+                                    </div>
+                                    <div class="donation-type-badge" id="selectedTypeDisplay">One-time</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other Countries Content (Initially Hidden) -->
+                        <div id="other-country-content" style="display: none;">
+                            <div class="info-note">
+                                <strong>Note:</strong> You will be redirected to our secure payment partner's website for your selected country.
+                            </div>
                         </div>
 
                         <div class="form-actions" style="display:flex; justify-content:center; margin-top:15px;">
-                            <button class="btn btn-next" id="nextButton" style="padding:12px 35px; font-size:16px;">
+                            <button class="btn btn-next" id="nextButton" style="padding:12px 35px; font-size:16px; display: none;">
                                 Next →
                             </button>
                         </div>
                     </div>
 
-                    <!-- Step 2: Personal Details -->
+                    <!-- Step 2: Personal Details (India only) -->
                     <div id="step2" class="form-step">
                         <div class="step-header">
                             <h2>Your Information</h2>
@@ -938,11 +949,6 @@
         </div>
     </section>
 
-    <!-- Mobile Donate Now Button (NEW) -->
-    <button id="mobileDonateBtn" class="mobile-donate-btn d-md-none">
-        <i class="fas fa-heart me-2"></i> Donate Now
-    </button>
-
     <!-- Payment Instructions Modal -->
     <div id="paymentModal" class="payment-modal">
         <div class="payment-modal-content">
@@ -960,6 +966,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Mobile Donate Now Button (NEW) -->
+    <button id="mobileDonateBtn" class="mobile-donate-btn d-md-none">
+        <i class="fas fa-heart me-2"></i> Donate Now
+    </button>
 
     <!-- Scrollable Donate Button (NEW) -->
     <a id="scrollableDonateBtn" class="scrollable-donate-btn d-none d-md-flex" href="#donation-form" style="display: none;">
@@ -1013,7 +1024,7 @@
             text-decoration: none;
             transition: 0.3s ease;
             white-space: nowrap;
-            margin-left: 10px;
+            margin-left: 5px;
         }
 
         .btn-getstarted:hover {
@@ -1149,7 +1160,8 @@
             }
 
             .btn-getstarted {
-                display: none !important;
+                padding: 6px 15px;
+                font-size: 0.9rem;
             }
 
             .mobile-nav-toggle {
@@ -2883,7 +2895,48 @@
             // Initialize scrollable donate button
             initScrollableDonateButton();
 
-            // Donation type toggle
+            // Country selection logic
+            const countryDropdown = document.querySelector('.country-dropdown');
+            const countrySelected = countryDropdown.querySelector('.dropdown-selected');
+            const countryOptions = countryDropdown.querySelectorAll('.option');
+            const indiaContent = document.getElementById('india-content');
+            const otherCountryContent = document.getElementById('other-country-content');
+            const nextButton = document.getElementById('nextButton');
+
+            let selectedCountry = '';
+
+            countrySelected.addEventListener('click', function () {
+                countryDropdown.classList.toggle('active');
+            });
+
+            countryOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    const value = this.getAttribute('data-value');
+                    const text = this.textContent;
+
+                    countrySelected.textContent = text;
+                    countrySelected.setAttribute('data-value', value);
+                    countryDropdown.classList.remove('active');
+                    
+                    // Store selected country
+                    selectedCountry = value;
+                    
+                    // Show/hide content based on country selection
+                    if (value === 'india') {
+                        indiaContent.style.display = 'block';
+                        otherCountryContent.style.display = 'none';
+                        nextButton.style.display = 'block';
+                        nextButton.textContent = 'Next →';
+                    } else {
+                        indiaContent.style.display = 'none';
+                        otherCountryContent.style.display = 'block';
+                        nextButton.style.display = 'block';
+                        nextButton.textContent = 'Proceed to Payment';
+                    }
+                });
+            });
+
+            // Donation type toggle (for India only)
             const donationTypeOptions = document.querySelectorAll('.donation-type-option');
             donationTypeOptions.forEach(option => {
                 option.addEventListener('click', function () {
@@ -2934,116 +2987,40 @@
             initializeAmountSelection('monthly-amounts', 'monthly-other-option-box', 'monthly-customAmountInput');
             initializeAmountSelection('onetime-amounts', 'onetime-other-option-box', 'onetime-customAmountInput');
 
-            // Next button functionality - CORRECTED LOGIC
-            document.getElementById('nextButton').addEventListener('click', function (e) {
+            // Next button functionality - UPDATED LOGIC
+            nextButton.addEventListener('click', function (e) {
                 e.preventDefault();
 
-                // Check if amount is selected
-                const selectedAmount = getSelectedAmount();
-                if (!selectedAmount) {
-                    alert('Please select or enter a donation amount');
-                    return;
-                }
-
                 // Check if country is selected
-                const countrySelected = document.querySelector('.country-dropdown .dropdown-selected');
-                if (!countrySelected || countrySelected.textContent === 'Choose Country') {
+                if (!selectedCountry) {
                     alert('Please select your country');
                     return;
                 }
 
-                const selectedCountry = countrySelected.textContent;
-                const donationType = getSelectedType();
-                const isIndia = selectedCountry.includes('India') || selectedCountry.includes('🇮🇳');
-                const countryCode = getCountryCode(selectedCountry);
-
-                // CORRECT LOGIC:
-                if (donationType === 'one-time') {
-                    // For one-time donation: India → Step 2, Other countries → direct redirect
-                    if (isIndia) {
-                        updateStep2DonationDisplay();
-                        switchTab(2);
-                    } else {
-                        // For non-India one-time donations, redirect directly
-                        if (countryCode && paymentLinks[countryCode]) {
-                            window.open(paymentLinks[countryCode], '_blank');
-                        } else {
-                            alert('Payment link not available for this country.');
-                        }
+                if (selectedCountry === 'india') {
+                    // For India: validate amount and go to step 2
+                    const selectedAmount = getSelectedAmount();
+                    if (!selectedAmount) {
+                        alert('Please select or enter a donation amount');
+                        return;
                     }
+                    
+                    updateStep2DonationDisplay();
+                    switchTab(2);
                 } else {
-                    // For monthly donation: India → Step 2, Other countries → show modal
-                    if (isIndia) {
-                        updateStep2DonationDisplay();
-                        switchTab(2);
+                    // For other countries: redirect to payment link
+                    if (paymentLinks[selectedCountry]) {
+                        window.open(paymentLinks[selectedCountry], '_blank');
                     } else {
-                        if (countryCode) {
-                            openPaymentModal(countryCode, selectedCountry);
-                        } else {
-                            alert('Payment option not available for this country.');
-                        }
+                        alert('Payment link not available for this country.');
                     }
                 }
             });
 
-            // Helper function to get country code
-            function getCountryCode(countryText) {
-                const countryMap = {
-                    'United States': 'usa',
-                    'United Kingdom': 'uk',
-                    'Australia': 'australia',
-                    'Canada': 'canada',
-                    'Germany': 'germany',
-                    'Belgium': 'belgium'
-                };
-
-                for (const [countryName, code] of Object.entries(countryMap)) {
-                    if (countryText.includes(countryName)) return code;
-                }
-                return null;
-            }
-
-            // Country dropdown functionality
-            const countryDropdown = document.querySelector('.country-dropdown');
-            const countrySelected = countryDropdown.querySelector('.dropdown-selected');
-            const countryOptions = countryDropdown.querySelectorAll('.option');
-
-            countrySelected.addEventListener('click', function () {
-                countryDropdown.classList.toggle('active');
-            });
-
-            countryOptions.forEach(option => {
-                option.addEventListener('click', function () {
-                    const value = this.getAttribute('data-value');
-                    const text = this.textContent;
-
-                    countrySelected.textContent = text;
-                    countrySelected.setAttribute('data-value', value);
-                    countryDropdown.classList.remove('active');
-                });
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function (e) {
-                if (!e.target.closest('.dropdown')) {
-                    document.querySelectorAll('.dropdown').forEach(dropdown => {
-                        dropdown.classList.remove('active');
-                    });
-                }
-            });
-
-            // Form submission handling
+            // Form submission handling (India only)
             document.getElementById('donationForm').addEventListener('submit', function (e) {
-                const countrySelected = document.querySelector('.country-dropdown .dropdown-selected').textContent;
-                const donationType = getSelectedType();
-
-                // Only allow form submission for India donations
-                if (!countrySelected.includes('India') && !countrySelected.includes('🇮🇳')) {
-                    e.preventDefault();
-                    alert('Please use the payment options for your country from the previous step.');
-                    return;
-                }
-
+                e.preventDefault();
+                
                 // Collect form data
                 const formData = new FormData(this);
 
@@ -3051,7 +3028,6 @@
                 let donationAmount = getSelectedAmount();
                 if (!donationAmount) {
                     alert('Please select a donation amount');
-                    e.preventDefault();
                     return;
                 }
 
@@ -3062,9 +3038,8 @@
                 // Here you would typically submit to your backend
                 console.log('Form data:', Object.fromEntries(formData));
 
-                // Prevent actual submission for demo
-                e.preventDefault();
                 alert('Proceeding with Indian payment gateway...');
+                // In real implementation, submit form to server
             });
 
             // Initialize Year of Graduation dropdown
@@ -3141,6 +3116,15 @@
                             selected.setAttribute('data-value', this.getAttribute('data-value') || this.textContent);
                             dropdown.classList.remove('active');
                         });
+                    });
+                }
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.dropdown')) {
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active');
                     });
                 }
             });

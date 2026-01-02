@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Impact Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: #fefaf7;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .stories-section {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h1 {
+            font-size: 3rem;
+            color: #2d3748;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header h1::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 5px;
+            background: #b04b34;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: #5a6268;
+            max-width: 750px;
+            margin: 30px auto 0;
+            line-height: 1.8;
+        }
+
+        .stories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+            gap: 35px;
+            margin-top: 30px;
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(176, 75, 52, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(176, 75, 52, 0.1);
+            position: relative;
+        }
+
+        .story-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(176, 75, 52, 0.15);
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #b04b34, #e67e22);
+            z-index: 2;
+        }
+
+        .card-image {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+            filter: brightness(0.95);
+        }
+
+        .story-card:hover .card-image img {
+            transform: scale(1.08);
+            filter: brightness(1);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(176, 75, 52, 0.95);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            backdrop-filter: blur(5px);
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(176, 75, 52, 0.3);
+            text-transform: uppercase;
+        }
+
+        .card-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content h3 {
+            font-size: 1.6rem;
+            color: #2d3748;
+            margin-bottom: 18px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .card-content p {
+            color: #5a6268;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .card-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #f0e9e6;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .stat-value {
+            font-weight: 800;
+            color: #b04b34;
+            font-size: 1.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #8a7f7a;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .alumni-icon {
+            color: #b04b34;
+            font-size: 1.8rem;
+            margin-bottom: 18px;
+            background: rgba(176, 75, 52, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover .alumni-icon {
+            background: rgba(176, 75, 52, 0.2);
+            transform: scale(1.1);
+        }
+
+        .impact-tag {
+            display: inline-block;
+            background: rgba(176, 75, 52, 0.1);
+            color: #b04b34;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            align-self: flex-start;
+            border: 1px solid rgba(176, 75, 52, 0.2);
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .read-more {
+            color: #b04b34;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #8a3c2a;
+            gap: 12px;
+        }
+
+        .card-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(176, 75, 52, 0.08);
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            line-height: 1;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .stories-container {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .stories-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .section-header h1 {
+                font-size: 2.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stories-container {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .section-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-header p {
+                font-size: 1.1rem;
+            }
+            
+            .card-content {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-header h1 {
+                font-size: 2rem;
+            }
+            
+            .stories-section {
+                padding: 40px 15px;
+            }
+            
+            .card-image {
+                height: 200px;
+            }
+            
+            .card-content h3 {
+                font-size: 1.4rem;
+            }
+            
+            .card-stats {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .stat {
+                flex-direction: row;
+                gap: 10px;
+            }
+            
+            .stat-label {
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="stories-section">
+        <div class="section-header">
+            <h1>Alumni Impact Stories</h1>
+            <p>Discover how alumni support is transforming lives and creating extraordinary opportunities for current students at our institution. Each story represents a life changed through generosity.</p>
+        </div>
+        
+        <div class="stories-container">
+            <!-- Story 1 Card -->
+            <div class="story-card">
+                <div class="card-number">01</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Student studying on campus">
+                    <div class="card-badge">Financial Support</div>
+                </div>
+                <div class="card-content">
+                    <div class="alumni-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <span class="impact-tag">Life-changing Support</span>
+                    <h3>A Timely Gift, A Stronger Future</h3>
+                    <p>Coming from a small farming family in rural Uttar Pradesh, Anshika knew early what financial uncertainty felt like. While a tuition fee waiver helped her enter IIT Kanpur, daily expenses like mess bills, electricity charges, and a failing laptop became overwhelming. At a critical moment, alumni support arrived. Pending dues were cleared, her laptop was repaired, and for the first time in months, Anshika could focus fully on her academics and placement preparation. This timely support restored not just stability, but confidence.</p>
+                    
+                    <div class="card-stats">
+                        <div class="stat">
+                            <div class="stat-value">Anshika</div>
+                            <div class="stat-label">IIT Kanpur Student</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Academic</div>
+                            <div class="stat-label">Support Type</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">2024</div>
+                            <div class="stat-label">Year</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <a href="#" class="read-more">
+                            Read full story
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <div class="social-share">
+                            <i class="fas fa-share-alt" style="color: #b04b34; opacity: 0.7;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 2 Card -->
+            <div class="story-card">
+                <div class="card-number">02</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Robotics team competition">
+                    <div class="card-badge">Global Excellence</div>
+                </div>
+                <div class="card-content">
+                    <div class="alumni-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <span class="impact-tag">International Achievement</span>
+                    <h3>From Campus to Global Champions</h3>
+                    <p>When Team Aerial Robotics qualified for the global finals at ICUAS 2025 in the United States, travel costs stood between them and the world stage. Alumni stepped in. With support from the IITK Alumni Association (Outer Delhi Chapter), the team represented IIT Kanpur internationally and returned as global winners. Competing against top teams from across continents, their first-place finish showcased what becomes possible when alumni invest in student ambition.</p>
+                    
+                    <div class="card-stats">
+                        <div class="stat">
+                            <div class="stat-value">Team Aerial</div>
+                            <div class="stat-label">Robotics Team</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">ICUAS 2025</div>
+                            <div class="stat-label">Competition</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">1st Place</div>
+                            <div class="stat-label">Achievement</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <a href="#" class="read-more">
+                            Read full story
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <div class="social-share">
+                            <i class="fas fa-share-alt" style="color: #b04b34; opacity: 0.7;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 3 Card -->
+            <div class="story-card">
+                <div class="card-number">03</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Para-athlete running on track">
+                    <div class="card-badge">Inclusive Support</div>
+                </div>
+                <div class="card-content">
+                    <div class="alumni-icon">
+                        <i class="fas fa-universal-access"></i>
+                    </div>
+                    <span class="impact-tag">Breaking Barriers</span>
+                    <h3>Empowering Ability Through Giving</h3>
+                    <p>Gaurav Swarnkar's journey in para-athletics is defined by determination and strengthened by support. With financial assistance from the Cell for Differently Abled Persons (CDAP), Gaurav accessed training and competition opportunities that transformed effort into achievement. His medals at state and national para-athletics championships stand as proof of what targeted support can unlock.</p>
+                    
+                    <div class="card-stats">
+                        <div class="stat">
+                            <div class="stat-value">Gaurav</div>
+                            <div class="stat-label">Para-Athlete</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">CDAP</div>
+                            <div class="stat-label">Support Program</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">National</div>
+                            <div class="stat-label">Champion</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <a href="#" class="read-more">
+                            Read full story
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <div class="social-share">
+                            <i class="fas fa-share-alt" style="color: #b04b34; opacity: 0.7;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.story-card');
+            
+            // Add animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Set initial state for animation
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Add click effect with ripple animation
+            cards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(176, 75, 52, 0.3);
+                        transform: scale(0);
+                        animation: ripple-animation 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        pointer-events: none;
+                        z-index: 1;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    
+                    // Remove ripple after animation
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+            
+            // Add keyboard navigation
+            cards.forEach(card => {
+                card.setAttribute('tabindex', '0');
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        });
+        
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
