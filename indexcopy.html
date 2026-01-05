@@ -581,18 +581,19 @@
             margin: 0 auto;
         }
 
-        /* Desktop view - FIXED BANNER with Text Overlay */
+        /* Desktop view - FIXED BANNER */
         @media (min-width: 992px) {
             .new-hero-section {
                 padding: 80px 0;
                 background: 
-                    url('WhatsApp Image 2026-01-05 at 11.22.12 AM.jpeg') left center/cover no-repeat;
+                    
+                    url('dbanner1.jpeg') left center/cover no-repeat;
+                /* FIXED: Changed from auto 100% to cover */
                 min-height: 900px; /* Fixed height */
-                height: 900px; /* Explicit height */
+                height: 95vh; /* Explicit height */
                 display: flex;
                 align-items: center;
                 background-color: #f8f9fa;
-                position: relative;
             }
 
             .hero-banner {
@@ -603,8 +604,6 @@
                 padding: 0;
                 background: transparent;
                 width: 100%;
-                position: relative;
-                z-index: 2;
             }
 
             .hero-form-container {
@@ -619,76 +618,6 @@
             .container.hero-content {
                 max-width: 1200px;
                 padding-right: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-                height: 100%;
-            }
-            
-            /* Banner Text Overlay - Left Side - REVISED FOR PROMINENT VISION & IMPACT */
-            .banner-text-overlay {
-                position: absolute;
-                left: 50px;
-                top: 50%;
-                transform: translateY(-50%);
-                max-width: 650px;
-                z-index: 1;
-                color: white;
-                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-            }
-            
-            .banner-text-overlay .main-title {
-                font-size: 6rem;
-                font-weight: 800;
-                margin-bottom: 0;
-                line-height: 1;
-                letter-spacing: -1px;
-            }
-            
-            .banner-text-overlay .subtitle-line {
-                display: flex;
-                align-items: center;
-                font-size: 2.2rem;
-                font-weight: 600;
-                margin-top: 15px;
-                opacity: 0.95;
-            }
-            
-            .banner-text-overlay .small-text {
-                font-size: 2.8rem;
-                font-weight: 400;
-                opacity: 1;
-                margin: 0 15px;
-            }
-            
-            .banner-text-overlay .large-text {
-                font-size: 4rem;
-                font-weight: 800;
-                color: #ffffff;
-                text-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
-                margin: 0 10px;
-                position: relative;
-            }
-            
-            .banner-text-overlay .year {
-                font-size: 2.2rem;
-                font-weight: 700;
-                color: #ffffff;
-                margin-top: 25px;
-                display: inline-block;
-                padding: 10px 30px;
-                background: rgba(176, 75, 52, 0.9);
-                border-radius: 10px;
-                letter-spacing: 2px;
-            }
-            
-            .banner-text-overlay .tagline {
-                font-size: 1.4rem;
-                margin-top: 30px;
-                font-weight: 500;
-                opacity: 0.9;
-                max-width: 550px;
-                line-height: 1.5;
             }
         }
 
@@ -758,35 +687,6 @@
             .hero-form-container {
                 max-width: 400px;
             }
-            
-            .banner-text-overlay {
-                left: 40px;
-                max-width: 550px;
-            }
-            
-            .banner-text-overlay .main-title {
-                font-size: 5rem;
-            }
-            
-            .banner-text-overlay .large-text {
-                font-size: 3.5rem;
-            }
-            
-            .banner-text-overlay .small-text {
-                font-size: 1.6rem;
-            }
-            
-            .banner-text-overlay .subtitle-line {
-                font-size: 2rem;
-            }
-            
-            .banner-text-overlay .year {
-                font-size: 2rem;
-            }
-            
-            .banner-text-overlay .tagline {
-                font-size: 1.3rem;
-            }
         }
 
         @media (max-width: 992px) {
@@ -797,10 +697,6 @@
             .hero-banner img {
                 height: 400px;
                 object-fit: cover;
-            }
-            
-            .banner-text-overlay {
-                display: none;
             }
         }
 
@@ -917,17 +813,6 @@
 
     <!-- Hero Section with Form - REVISED STRUCTURE -->
     <section id="donation-form" class="new-hero-section">
-        <!-- Banner Text Overlay (Desktop Only) -->
-        <div class="banner-text-overlay d-none d-lg-block">
-            <div class="subtitle-line">
-                <span class="small-text">From</span>
-                <span class="large-text">VISION</span><br>
-                <span class="small-text">to</span>
-                <span class="large-text">IMPACT</span>
-            </div>
-            <div class="year">Annual Giving 2026</div>
-        </div>
-        
         <!-- Banner Image (Visible on Mobile) -->
         <div class="hero-banner d-block d-lg-none">
             <img src="AG26.jpg" alt="Season of Giving Banner" class="img-fluid">
@@ -2573,7 +2458,7 @@
                     <div class="testimonial">
                         <img src="testimonials/Dhanraj K Chokappa.jpg" alt="Mr. Gokul Rajaram">
                         <div class="testimonial-text">
-                            <div class="testimonial-name">Mr. Dhanraj K. Chokappa|</div>
+                            <div class="testimonial-name">Mr. Dhanraj K. Chokappa</div>
                             <div class="testimonial-title">(BT/CHE/1982),<br /> Independent Consultant. Retired from Unilever R&amp;D Bangalore</div>
                             <div class="quote-icon"><i class="bi bi-quote open-quote"></i></div>
                             <p>My five years as a BTech student from 1977 to 1982 provided a strong foundation for
