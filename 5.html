@@ -549,13 +549,12 @@
             color: #B04B34;
         }
 
-        /* New Hero Section with Form - FIXED BANNER */
+        /* New Hero Section with Form - FIXED BANNER CUTTING */
         .new-hero-section {
             position: relative;
             padding: 0;
             min-height: auto;
             overflow: hidden;
-            background: #f8f9fa; /* Fallback for mobile */
         }
 
         .hero-banner {
@@ -581,19 +580,17 @@
             margin: 0 auto;
         }
 
-        /* Desktop view - FIXED BANNER */
+        /* Desktop view - FIXED BANNER POSITIONING */
         @media (min-width: 992px) {
             .new-hero-section {
                 padding: 80px 0;
                 background: 
-                    
-                    url('dbanner1.jpeg') left center/cover no-repeat;
-                /* FIXED: Changed from auto 100% to cover */
-                min-height: 900px; /* Fixed height */
-                height: 900px; /* Explicit height */
+                    linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 30%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%),
+                    url('AG26.jpg') center left/auto 100% no-repeat;
+                min-height: 700px; /* Reduced from 900px */
                 display: flex;
                 align-items: center;
-                background-color: #f8f9fa;
+                background-color: #f8f9fa; /* Fallback color */
             }
 
             .hero-banner {
@@ -876,9 +873,9 @@
 
                             <!-- One-time Amount Options -->
                             <div class="amount-options-simple" id="onetime-amounts">
-                                <div class="amount-option" data-amount="50000">₹50,000</div>
-                                <div class="amount-option" data-amount="25000">₹25,000</div>
                                 <div class="amount-option" data-amount="10000">₹10,000</div>
+                                <div class="amount-option" data-amount="25000">₹25,000</div>
+                                <div class="amount-option" data-amount="50000">₹50,000</div>
                                 <div class="other-option-box" id="onetime-other-option-box">
                                     <span class="currency-symbol">₹</span>
                                     <input type="number" id="onetime-customAmountInput" placeholder="Other" min="1">
@@ -887,9 +884,9 @@
 
                             <!-- Monthly Amount Options (Initially Hidden) -->
                             <div class="amount-options-simple" id="monthly-amounts" style="display: none;">
-                                <div class="amount-option" data-amount="10000">₹10,000</div>
+                                <div class="amount-option" data-amount="1000">₹1,000</div>
                                 <div class="amount-option" data-amount="5000">₹5,000</div>
-                                <div class="amount-option" data-amount="1000">₹1000</div>
+                                <div class="amount-option" data-amount="10000">₹10,000</div>
                                 <div class="other-option-box" id="monthly-other-option-box">
                                     <span class="currency-symbol">₹</span>
                                     <input type="number" id="monthly-customAmountInput" placeholder="Other" min="1">
@@ -1032,6 +1029,7 @@
                                             <span class="radio-label">No</span>
                                         </label>
                                     </div>
+                                </div>
                             </div>
 
                             <div class="form-actions">
@@ -1869,374 +1867,672 @@
             </style>
         </section>
 
-        <!-- Stories Section - COMPLETELY FIXED MOBILE VIEW -->
-        <section id="stories" class="testimonials section" style="padding: 60px 0;">
-            <div class="container">
-                <div class="section-header text-center mb-5">
-                    <h1 class="fw-bold" style="color: #2d3748; font-size: 2.5rem;">Stories of Change</h1>
-                </div>
-
-                <!-- Desktop Grid View -->
-                <div class="row g-4 d-none d-md-flex">
-                    <!-- Story 1 -->
-                    <div class="col-md-4">
-                        <div class="story-card h-100">
-                            <div class="story-image">
-                                <img src="Anshika (1).jpg" alt="Anshika - IIT Kanpur Student" class="img-fluid">
+        <!-- Stories Section - IMPROVED MOBILE VIEW -->
+        <section id="stories" class="testimonials section">
+            <div class="alumni-impact-container">
+                <section class="alumni-impact-section">
+                    <div class="alumni-section-header">
+                        <h1>Stories of Change</h1>
+                    </div>
+                    
+                    <!-- Stories Scroller Container -->
+                    <div class="stories-scroller-container">
+                        <div class="alumni-stories-grid">
+                            <!-- Story 1 Card -->
+                            <div class="alumni-story-card" id="alumni-story-1">
+                                <div class="alumni-card-image">
+                                    <img src="Anshika (1).jpg" alt="Student studying on campus">
+                                </div>
+                                <div class="alumni-card-content">
+                                    <h3>A Timely Gift, A Stronger Future</h3>
+                                    <p>Coming from a small farming family in rural Uttar Pradesh, Anshika knew early what financial uncertainty felt like. While a tuition fee waiver helped her enter IIT Kanpur, daily expenses like mess bills, electricity charges, and a failing laptop became overwhelming. At a critical moment, alumni support arrived. Pending dues were cleared, her laptop was repaired, and for the first time in months, Anshika could focus fully on her academics and placement preparation. This timely support restored not just stability, but confidence. Inspired by alumni generosity, she now dreams of giving back just as she was supported.</p>
+                                    
+                                    <div class="alumni-card-stats">
+                                        <div class="alumni-stat">
+                                            <div class="alumni-stat-value">Anshika</div>
+                                            <div class="alumni-stat-label">IIT Kanpur Student</div>
+                                        </div>
+                                        <div class="alumni-stat">
+                                            <div class="alumni-stat-value">Academic</div>
+                                            <div class="alumni-stat-label">Support Type</div>
+                                        </div>
+                                        <div class="alumni-stat">
+                                            <div class="alumni-stat-value">2024</div>
+                                            <div class="alumni-stat-label">Year</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="story-content p-4">
-                                <h3 class="story-title">A Timely Gift, A Stronger Future</h3>
-                                <p class="story-text">Coming from a small farming family in rural Uttar Pradesh, Anshika knew early what financial uncertainty felt like. While a tuition fee waiver helped her enter IIT Kanpur, daily expenses like mess bills, electricity charges, and a failing laptop became overwhelming. At a critical moment, alumni support arrived. Pending dues were cleared, her laptop was repaired, and for the first time in months, Anshika could focus fully on her academics and placement preparation. This timely support restored not just stability, but confidence. Inspired by alumni generosity, she now dreams of giving back just as she was supported.</p>
-                                
-                                <div class="story-stats row mt-3">
-                                    <div class="col-12 text-center">
-                                        <div class="stat-value">Anshika Singh</div>
-                                        <div class="stat-label">B.Tech, IITK Student</div>
+                            
+                            <!-- Story 2 Card -->
+                            <div class="alumni-story-card" id="alumni-story-2">
+                                <div class="alumni-card-image">
+                                    <img src="Aerial Robotics Win.jpeg" alt="Robotics team competition">
+                                </div>
+                                <div class="alumni-card-content">
+                                    <h3>From Campus to Global Champions</h3>
+                                    <p>When Team Aerial Robotics qualified for the global finals at ICUAS 2025 in the United States, travel costs stood between them and the world stage. Alumni stepped in. With support from the IITK Alumni Association (Outer Delhi Chapter), the team represented IIT Kanpur internationally and returned as global winners. Competing against top teams from across continents, their first-place finish showcased what becomes possible when alumni invest in student ambition. This victory is a powerful reminder: alumni support doesn't just fund travel, it fuels global excellence and institutional pride.</p>
+                                    
+                                    <div class="alumni-card-stats">
+                                        <div class="alumni-stat">
+                                            <div class="alumni-stat-value">Team Aerial</div>
+                                            <div class="alumni-stat-label">Robotics Team</div>
+                                        </div>
+                                        <div class="alumni-stat">
+                                            <div class="alumni-stat-value">ICUAS 2025</div>
+                                            <div class="alumni-stat-label">Competition</div>
+                                        </div>
+                                        <div class="alumni-stat">
+                                            <div class="alumni-stat-value">1st Place</div>
+                                            <div class="alumni-stat-label">Achievement</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Story 3 Card -->
+                            <div class="alumni-story-card" id="alumni-story-3">
+                                <div class="alumni-card-image">
+                                    <img src="Mr.Gaurav Swarnkar.jpg" alt="Para-athlete running on track">
+                                </div>
+                                <div class="alumni-card-content">
+                                    <h3>Empowering Ability Through Giving</h3>
+                                    <p>Gaurav Swarnkar's journey in para-athletics is defined by determination and strengthened by support. With financial assistance from the Cell for Differently Abled Persons (CDAP), Gaurav accessed training and competition opportunities that transformed effort into achievement. His medals at state and national para-athletics championships stand as proof of what targeted support can unlock. Alumni and institutional backing helped convert talent into podium finishes, reinforcing a powerful truth: when barriers are removed, potential rises. Gaurav's success reflects the lasting impact of inclusive and purpose-driven giving.</p>
+                                    
+                                    <div class="alumni-card-stats">
+                                        <div class="alumni-stat">
+                                            <div class="alumni-stat-value">Gaurav</div>
+                                            <div class="alumni-stat-label">Para-Athlete</div>
+                                        </div>
+                                        <div class="alumni-stat">
+                                            <div class="alumni-stat-value">CDAP</div>
+                                            <div class="alumni-stat-label">Support Program</div>
+                                        </div>
+                                        <div class="alumni-stat">
+                                            <div class="alumni-stat-value">National</div>
+                                            <div class="alumni-stat-label">Champion</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Story 2 -->
-                    <div class="col-md-4">
-                        <div class="story-card h-100">
-                            <div class="story-image">
-                                <img src="Aerial Robotics Win.jpeg" alt="Team Aerial Robotics" class="img-fluid">
-                            </div>
-                            <div class="story-content p-4">
-                                <h3 class="story-title">From Campus to Global Champions</h3>
-                                <p class="story-text">When Team Aerial Robotics qualified for the global finals at ICUAS 2025 in the United States, travel costs stood between them and the world stage. Alumni stepped in. With support from the IITK Alumni Association (Outer Delhi Chapter), the team represented IIT Kanpur internationally and returned as global winners. Competing against top teams from across continents, their first-place finish showcased what becomes possible when alumni invest in student ambition. This victory is a powerful reminder: alumni support doesn't just fund travel, it fuels global excellence and institutional pride.</p>
-                                
-                                <div class="story-stats row mt-3">
-                                    <div class="col-12 text-center">
-                                        <div class="stat-value text-center">Team Aerial Robotics</div>
-                                        <div class="stat-label text-center">Winners ICUAS 2025</div>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- Mobile Scroll Indicators -->
+                    <div class="mobile-scroll-indicators d-md-none">
+                        <button class="scroll-btn scroll-prev" aria-label="Previous story">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="scroll-dots">
+                            <span class="scroll-dot active" data-index="0"></span>
+                            <span class="scroll-dot" data-index="1"></span>
+                            <span class="scroll-dot" data-index="2"></span>
                         </div>
+                        <button class="scroll-btn scroll-next" aria-label="Next story">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
-                    
-                    <!-- Story 3 -->
-                    <div class="col-md-4">
-                        <div class="story-card h-100">
-                            <div class="story-image">
-                                <img src="Mr.Gaurav Swarnkar.jpg" alt="Gaurav Swarnkar - Para-Athlete" class="img-fluid">
-                            </div>
-                            <div class="story-content p-4">
-                                <h3 class="story-title">Empowering Ability Through Giving</h3>
-                                <p class="story-text">Gaurav Swarnkar's journey in para-athletics is defined by determination and strengthened by support. With financial assistance from the Cell for Differently Abled Persons (CDAP), Gaurav accessed training and competition opportunities that transformed effort into achievement. His medals at state and national para-athletics championships stand as proof of what targeted support can unlock. Alumni and institutional backing helped convert talent into podium finishes, reinforcing a powerful truth: when barriers are removed, potential rises. Gaurav's success reflects the lasting impact of inclusive and purpose-driven giving.</p>
-                                
-                                <div class="story-stats row mt-3">
-                                    <div class="col-12 text-center">
-                                        <div class="stat-value">Gaurav Swarnkar</div>
-                                        <div class="stat-label">Winner Para Athletics 2025</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mobile Carousel View -->
-                <div class="d-md-none">
-                    <div id="storiesCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <!-- Story 1 -->
-                            <div class="carousel-item active">
-                                <div class="story-card">
-                                    <div class="story-image">
-                                        <img src="Anshika (1).jpg" alt="Anshika - IIT Kanpur Student" class="img-fluid">
-                                    </div>
-                                    <div class="story-content p-4">
-                                        <h3 class="story-title">A Timely Gift, A Stronger Future</h3>
-                                        <p class="story-text">Coming from a small farming family in rural Uttar Pradesh, Anshika knew early what financial uncertainty felt like. While a tuition fee waiver helped her enter IIT Kanpur, daily expenses like mess bills, electricity charges, and a failing laptop became overwhelming. At a critical moment, alumni support arrived. Pending dues were cleared, her laptop was repaired, and for the first time in months, Anshika could focus fully on her academics and placement preparation. This timely support restored not just stability, but confidence. Inspired by alumni generosity, she now dreams of giving back just as she was supported.</p>
-                                        
-                                        <div class="story-stats row mt-3">
-                                            <div class="col-12 text-center">
-                                                <div class="stat-value">Anshika Singh</div>
-                                                <div class="stat-label">B.Tech, IITK Student</div>
-                                            </div>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Story 2 -->
-                            <div class="carousel-item">
-                                <div class="story-card">
-                                    <div class="story-image">
-                                        <img src="Aerial Robotics Win.jpeg" alt="Team Aerial Robotics" class="img-fluid">
-                                    </div>
-                                    <div class="story-content p-4">
-                                        <h3 class="story-title">From Campus to Global Champions</h3>
-                                        <p class="story-text">When Team Aerial Robotics qualified for the global finals at ICUAS 2025 in the United States, travel costs stood between them and the world stage. Alumni stepped in. With support from the IITK Alumni Association (Outer Delhi Chapter), the team represented IIT Kanpur internationally and returned as global winners. Competing against top teams from across continents, their first-place finish showcased what becomes possible when alumni invest in student ambition. This victory is a powerful reminder: alumni support doesn't just fund travel, it fuels global excellence and institutional pride.</p>
-                                        
-                                        <div class="story-stats row mt-3">
-                                            <div class="col-12 text-center">
-                                                <div class="stat-value text-center">Team Aerial Robotics</div>
-                                                <div class="stat-label text-center">Winners ICUAS 2025</div>
-                                            </div>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Story 3 -->
-                            <div class="carousel-item">
-                                <div class="story-card">
-                                    <div class="story-image">
-                                        <img src="Mr.Gaurav Swarnkar.jpg" alt="Gaurav Swarnkar - Para-Athlete" class="img-fluid">
-                                    </div>
-                                    <div class="story-content p-4">
-                                        <h3 class="story-title">Empowering Ability Through Giving</h3>
-                                        <p class="story-text">Gaurav Swarnkar's journey in para-athletics is defined by determination and strengthened by support. With financial assistance from the Cell for Differently Abled Persons (CDAP), Gaurav accessed training and competition opportunities that transformed effort into achievement. His medals at state and national para-athletics championships stand as proof of what targeted support can unlock. Alumni and institutional backing helped convert talent into podium finishes, reinforcing a powerful truth: when barriers are removed, potential rises. Gaurav's success reflects the lasting impact of inclusive and purpose-driven giving.</p>
-                                        
-                                        <div class="story-stats row mt-3">
-                                            <div class="col-12 text-center">
-                                                <div class="stat-value">Gaurav Swarnkar</div>
-                                                <div class="stat-label">Winner Para Athletics 2025</div>
-                                            </div>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Carousel Controls -->
-                        
-                        
-                        <!-- Carousel Indicators -->
-                        <div class="carousel-indicators mt-3">
-                            <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
-                            <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="1"></button>
-                            <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="2"></button>
-                        </div>
-                    </div>
-                </div>
+                </section>
             </div>
-            
+
             <style>
-                /* Stories Section Styles */
-                .story-card {
-                    background: white;
-                    border-radius: 15px;
-                    overflow: hidden;
-                    box-shadow: 0 10px 30px rgba(176, 75, 52, 0.1);
-                    border: 1px solid rgba(176, 75, 52, 0.1);
-                    height: 100%;
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                }
-                
-                .story-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 15px 40px rgba(176, 75, 52, 0.15);
-                }
-                
-                .story-image {
-                    height: 250px;
-                    overflow: hidden;
-                }
-                
-                .story-image img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    transition: transform 0.5s ease;
-                }
-                
-                .story-card:hover .story-image img {
-                    transform: scale(1.05);
-                }
-                
-                .story-content {
-                    padding: 25px;
-                }
-                
-                .story-title {
-                    color: #2d3748;
-                    font-size: 1.4rem;
-                    font-weight: 700;
-                    margin-bottom: 15px;
-                    line-height: 1.3;
-                }
-                
-                .story-text {
-                    color: #5a6268;
+                /* Stories Section - IMPROVED MOBILE VIEW */
+                .alumni-impact-container {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    color: #333;
                     line-height: 1.6;
-                    margin-bottom: 20px;
+                    padding: 20px;
                 }
-                
-                .story-stats {
-                    border-top: 1px solid #f0e9e6;
-                    padding-top: 15px;
+
+                .alumni-impact-section {
+                    max-width: 1300px;
+                    margin: 0 auto;
+                    padding: 60px 20px;
                 }
-                
-                .stat-value {
-                    color: #B04B34;
-                    font-weight: 700;
-                    font-size: 1.1rem;
-                    margin-bottom: 5px;
+
+                .alumni-section-header {
+                    text-align: center;
+                    margin-bottom: 60px;
                 }
-                
-                .stat-label {
-                    color: #8a7f7a;
-                    font-size: 0.85rem;
-                    font-weight: 500;
+
+                .alumni-section-header h1 {
+                    font-size: 3rem;
+                    color: #2d3748;
+                    margin-bottom: 15px;
+                    position: relative;
+                    display: inline-block;
+                    font-weight: 800;
+                    letter-spacing: -0.5px;
                 }
-                
-                /* Carousel Styles for Mobile */
-                #storiesCarousel {
+
+                /* Stories Scroller Container - IMPROVED MOBILE */
+                .stories-scroller-container {
+                    width: 100%;
                     position: relative;
                 }
-                
-                #storiesCarousel .carousel-indicators {
-                    position: static;
-                    margin-top: 20px;
+
+                /* Desktop Grid Layout */
+                .alumni-stories-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 35px;
+                    margin-top: 30px;
                 }
-                
-                #storiesCarousel .carousel-indicators button {
-                    width: 10px;
-                    height: 10px;
-                    border-radius: 50%;
-                    background-color: #ccc;
-                    margin: 0 5px;
-                    border: none;
-                }
-                
-                #storiesCarousel .carousel-indicators button.active {
-                    background-color: #B04B34;
-                }
-                
-                #storiesCarousel .carousel-control-prev,
-                #storiesCarousel .carousel-control-next {
-                    width: 40px;
-                    height: 40px;
-                    background-color: #B04B34;
-                    border-radius: 50%;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    opacity: 0.8;
-                }
-                
-                #storiesCarousel .carousel-control-prev {
-                    left: 10px;
-                }
-                
-                #storiesCarousel .carousel-control-next {
-                    right: 10px;
-                }
-                
-                #storiesCarousel .carousel-control-prev:hover,
-                #storiesCarousel .carousel-control-next:hover {
-                    opacity: 1;
-                }
-                
-                /* Responsive Adjustments */
-                @media (max-width: 768px) {
-                    .story-image {
+
+                /* Mobile Horizontal Scroll Layout - IMPROVED */
+                @media (max-width: 992px) {
+                    .stories-scroller-container {
+                        overflow-x: auto;
+                        overflow-y: hidden;
+                        scroll-behavior: smooth;
+                        scrollbar-width: none; /* Firefox */
+                        -ms-overflow-style: none; /* IE and Edge */
+                        -webkit-overflow-scrolling: touch;
+                        padding: 15px 10px 30px;
+                        margin: 0 -10px;
+                        width: calc(100% + 20px);
+                    }
+                    
+                    .stories-scroller-container::-webkit-scrollbar {
+                        display: none; /* Chrome, Safari, Opera */
+                    }
+                    
+                    .alumni-stories-grid {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        gap: 20px;
+                        width: max-content;
+                        padding: 10px 15px;
+                        margin: 0;
+                        scroll-snap-type: x mandatory;
+                    }
+                    
+                    .alumni-story-card {
+                        flex: 0 0 85vw;
+                        max-width: 85vw;
+                        min-width: 85vw;
+                        scroll-snap-align: start;
+                        margin: 0;
+                        height: auto;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    
+                    .alumni-section-header h1 {
+                        font-size: 2.2rem;
+                        margin-bottom: 10px;
+                    }
+                    
+                    /* Improved mobile card sizing */
+                    .alumni-card-image {
                         height: 200px;
+                        flex-shrink: 0;
                     }
                     
-                    .story-content {
+                    .alumni-card-content {
                         padding: 20px;
+                        flex-grow: 1;
+                        display: flex;
+                        flex-direction: column;
                     }
                     
-                    .story-title {
-                        font-size: 1.3rem;
+                    .alumni-card-content h3 {
+                        font-size: 1.4rem;
+                        margin-bottom: 12px;
+                        line-height: 1.3;
                     }
                     
-                    .story-text {
+                    .alumni-card-content p {
                         font-size: 0.95rem;
-                        line-height: 1.5;
+                        line-height: 1.6;
+                        margin-bottom: 20px;
+                        flex-grow: 1;
                     }
                     
-                    .stat-value {
+                    .alumni-card-stats {
+                        margin-top: auto;
+                        padding-top: 15px;
+                        border-top: 1px solid #f0e9e6;
+                    }
+                    
+                    .alumni-stat-value {
                         font-size: 1rem;
                     }
                     
-                    .stat-label {
+                    .alumni-stat-label {
                         font-size: 0.8rem;
                     }
-                    
-                    .section-header h1 {
-                        font-size: 2rem;
-                    }
                 }
-                
-                @media (max-width: 576px) {
-                    .story-image {
+
+                @media (max-width: 768px) {
+                    .alumni-story-card {
+                        flex: 0 0 88vw;
+                        max-width: 88vw;
+                        min-width: 88vw;
+                    }
+                    
+                    .alumni-impact-section {
+                        padding: 40px 15px;
+                    }
+                    
+                    .alumni-card-image {
                         height: 180px;
                     }
-                    
-                    .story-title {
-                        font-size: 1.2rem;
+                }
+
+                @media (max-width: 576px) {
+                    .alumni-story-card {
+                        flex: 0 0 92vw;
+                        max-width: 92vw;
+                        min-width: 92vw;
                     }
                     
-                    .story-text {
+                    .alumni-section-header h1 {
+                        font-size: 1.8rem;
+                    }
+                    
+                    .alumni-card-image {
+                        height: 170px;
+                    }
+                    
+                    .alumni-card-content h3 {
+                        font-size: 1.3rem;
+                    }
+                    
+                    .alumni-card-content p {
                         font-size: 0.9rem;
+                        line-height: 1.5;
                     }
                     
-                    #storiesCarousel .carousel-control-prev,
-                    #storiesCarousel .carousel-control-next {
-                        width: 35px;
-                        height: 35px;
+                    .alumni-card-content {
+                        padding: 18px;
                     }
                     
-                    #storiesCarousel .carousel-control-prev-icon,
-                    #storiesCarousel .carousel-control-next-icon {
-                        width: 15px;
-                        height: 15px;
+                    /* Better stats layout for small mobile */
+                    .alumni-card-stats {
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 8px;
+                    }
+                    
+                    .alumni-stat {
+                        text-align: center;
+                    }
+                    
+                    .alumni-stat-value {
+                        font-size: 0.95rem;
+                        height: auto;
+                        margin-bottom: 3px;
+                    }
+                    
+                    .alumni-stat-label {
+                        font-size: 0.75rem;
+                        height: auto;
                     }
                 }
-                
+
                 @media (max-width: 400px) {
-                    .story-image {
+                    .alumni-story-card {
+                        flex: 0 0 95vw;
+                        max-width: 95vw;
+                        min-width: 95vw;
+                    }
+                    
+                    .alumni-card-image {
                         height: 160px;
                     }
                     
-                    .story-content {
-                        padding: 15px;
+                    .alumni-card-content h3 {
+                        font-size: 1.2rem;
                     }
                     
-                    .story-title {
-                        font-size: 1.1rem;
-                    }
-                    
-                    .story-text {
+                    .alumni-card-content p {
                         font-size: 0.85rem;
                     }
                     
-                    .story-stats {
-                        padding-top: 10px;
+                    /* Stack stats vertically on very small screens */
+                    .alumni-card-stats {
+                        grid-template-columns: 1fr;
+                        gap: 12px;
                     }
                     
-                    .stat-value {
-                        font-size: 0.9rem;
+                    .alumni-stat {
+                        flex-direction: row;
+                        justify-content: space-between;
+                        text-align: left;
+                        padding-bottom: 8px;
+                        border-bottom: 1px solid #f0e9e6;
                     }
                     
-                    .stat-label {
-                        font-size: 0.75rem;
+                    .alumni-stat:last-child {
+                        border-bottom: none;
+                        padding-bottom: 0;
+                    }
+                }
+
+                /* Alumni Story Card Styles */
+                .alumni-story-card {
+                    background: white;
+                    border-radius: 18px;
+                    overflow: hidden;
+                    box-shadow: 0 12px 40px rgba(176, 75, 52, 0.08);
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    border: 1px solid rgba(176, 75, 52, 0.1);
+                    position: relative;
+                }
+
+                .alumni-story-card:hover {
+                    transform: translateY(-12px);
+                    box-shadow: 0 20px 50px rgba(176, 75, 52, 0.15);
+                }
+
+                .alumni-story-card::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 5px;
+                    background: linear-gradient(90deg, #b04b34, #e67e22);
+                    z-index: 2;
+                }
+
+                .alumni-card-image {
+                    height: 240px;
+                    overflow: hidden;
+                    position: relative;
+                }
+
+                .alumni-card-image img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.7s ease;
+                    filter: brightness(0.95);
+                }
+
+                .alumni-story-card:hover .alumni-card-image img {
+                    transform: scale(1.08);
+                    filter: brightness(1);
+                }
+
+                .alumni-card-content h3 {
+                    font-size: 1.6rem;
+                    color: #2d3748;
+                    margin-bottom: 18px;
+                    line-height: 1.3;
+                    font-weight: 700;
+                }
+
+                .alumni-card-content p {
+                    color: #5a6268;
+                    margin-bottom: 25px;
+                    flex-grow: 1;
+                    font-size: 1.05rem;
+                    line-height: 1.7;
+                }
+
+                /* Alumni Card Stats */
+                .alumni-card-stats {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    margin-top: 25px;
+                    padding-top: 25px;
+                    border-top: 1px solid #f0e9e6;
+                    gap: 10px;
+                }
+
+                .alumni-stat {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                    position: relative;
+                }
+
+                .alumni-stat-value {
+                    font-weight: 700;
+                    color: #b04b34;
+                    font-size: 1.1rem;
+                    margin-bottom: 5px;
+                    line-height: 1.2;
+                    height: 1.4rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                }
+
+                .alumni-stat-label {
+                    font-size: 0.8rem;
+                    color: #8a7f7a;
+                    font-weight: 500;
+                    line-height: 1.2;
+                    height: 2rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                }
+
+                /* Mobile Scroll Indicators - IMPROVED */
+                .mobile-scroll-indicators {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 25px;
+                    gap: 15px;
+                    padding: 10px 0;
+                }
+
+                .scroll-btn {
+                    background: #B04B34;
+                    color: white;
+                    border: none;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 4px 10px rgba(176, 75, 52, 0.3);
+                    font-size: 1rem;
+                }
+
+                .scroll-btn:hover {
+                    background: #8c3a2a;
+                    transform: scale(1.1);
+                }
+
+                .scroll-btn:disabled {
+                    background: #cccccc;
+                    cursor: not-allowed;
+                    transform: none;
+                    opacity: 0.5;
+                }
+
+                .scroll-dots {
+                    display: flex;
+                    gap: 10px;
+                }
+
+                .scroll-dot {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background: #ddd;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+
+                .scroll-dot.active {
+                    background: #B04B34;
+                    transform: scale(1.2);
+                }
+
+                .scroll-dot:hover {
+                    background: #B04B34;
+                }
+
+                /* Hide scroll indicators on desktop */
+                @media (min-width: 993px) {
+                    .mobile-scroll-indicators {
+                        display: none;
                     }
                 }
             </style>
             
             <script>
-                // Initialize carousel for mobile
+                // Stories of Change Mobile Scroller - IMPROVED
                 document.addEventListener('DOMContentLoaded', function() {
-                    const storiesCarousel = document.getElementById('storiesCarousel');
-                    if (storiesCarousel) {
-                        // Bootstrap carousel is already initialized via data-bs-ride attribute
-                        // Add smooth scrolling for carousel items
-                        const carousel = new bootstrap.Carousel(storiesCarousel, {
-                            interval: 5000,
-                            wrap: true
+                    const storiesContainer = document.querySelector('.stories-scroller-container');
+                    const storiesGrid = document.querySelector('.alumni-stories-grid');
+                    const storyCards = document.querySelectorAll('.alumni-story-card');
+                    const scrollPrevBtn = document.querySelector('.scroll-prev');
+                    const scrollNextBtn = document.querySelector('.scroll-next');
+                    const scrollDots = document.querySelectorAll('.scroll-dot');
+                    
+                    // Only initialize scroller if on mobile
+                    if (window.innerWidth <= 992) {
+                        let currentIndex = 0;
+                        const cardCount = storyCards.length;
+                        
+                        // Calculate card width including gap
+                        function getCardWidth() {
+                            const card = storyCards[0];
+                            const cardStyle = window.getComputedStyle(card);
+                            const cardWidth = card.offsetWidth;
+                            const gap = 20; // Gap between cards
+                            return cardWidth + gap;
+                        }
+                        
+                        // Function to scroll to specific index
+                        function scrollToIndex(index) {
+                            if (index < 0) index = 0;
+                            if (index >= cardCount) index = cardCount - 1;
+                            
+                            currentIndex = index;
+                            const cardWidth = getCardWidth();
+                            const scrollPosition = index * cardWidth;
+                            
+                            storiesContainer.scrollTo({
+                                left: scrollPosition,
+                                behavior: 'smooth'
+                            });
+                            
+                            updateIndicators();
+                        }
+                        
+                        // Function to update indicators
+                        function updateIndicators() {
+                            // Update dots
+                            scrollDots.forEach((dot, i) => {
+                                dot.classList.toggle('active', i === currentIndex);
+                            });
+                            
+                            // Update button states
+                            if (scrollPrevBtn) scrollPrevBtn.disabled = currentIndex === 0;
+                            if (scrollNextBtn) scrollNextBtn.disabled = currentIndex === cardCount - 1;
+                        }
+                        
+                        // Previous button click
+                        if (scrollPrevBtn) {
+                            scrollPrevBtn.addEventListener('click', function() {
+                                scrollToIndex(currentIndex - 1);
+                            });
+                        }
+                        
+                        // Next button click
+                        if (scrollNextBtn) {
+                            scrollNextBtn.addEventListener('click', function() {
+                                scrollToIndex(currentIndex + 1);
+                            });
+                        }
+                        
+                        // Dot click
+                        scrollDots.forEach(dot => {
+                            dot.addEventListener('click', function() {
+                                const index = parseInt(this.getAttribute('data-index'));
+                                scrollToIndex(index);
+                            });
+                        });
+                        
+                        // Update indicators on scroll
+                        storiesContainer.addEventListener('scroll', function() {
+                            const scrollPosition = storiesContainer.scrollLeft;
+                            const cardWidth = getCardWidth();
+                            const newIndex = Math.round(scrollPosition / cardWidth);
+                            
+                            if (newIndex !== currentIndex) {
+                                currentIndex = newIndex;
+                                updateIndicators();
+                            }
+                        });
+                        
+                        // Initialize button states
+                        updateIndicators();
+                        
+                        // Add touch swipe support
+                        let touchStartX = 0;
+                        let touchEndX = 0;
+                        
+                        storiesContainer.addEventListener('touchstart', function(e) {
+                            touchStartX = e.changedTouches[0].screenX;
+                        }, { passive: true });
+                        
+                        storiesContainer.addEventListener('touchend', function(e) {
+                            touchEndX = e.changedTouches[0].screenX;
+                            handleSwipe();
+                        }, { passive: true });
+                        
+                        function handleSwipe() {
+                            const swipeThreshold = 50;
+                            
+                            if (touchStartX - touchEndX > swipeThreshold) {
+                                // Swipe left - next
+                                scrollToIndex(currentIndex + 1);
+                            } else if (touchEndX - touchStartX > swipeThreshold) {
+                                // Swipe right - previous
+                                scrollToIndex(currentIndex - 1);
+                            }
+                        }
+                        
+                        // Handle window resize
+                        let resizeTimeout;
+                        window.addEventListener('resize', function() {
+                            clearTimeout(resizeTimeout);
+                            resizeTimeout = setTimeout(function() {
+                                updateIndicators();
+                            }, 250);
                         });
                     }
+                    
+                    // Animation on scroll for alumni cards
+                    const alumniObserverOptions = {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -50px 0px'
+                    };
+                    
+                    const alumniObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.style.opacity = '1';
+                                entry.target.style.transform = 'translateY(0)';
+                            }
+                        });
+                    }, alumniObserverOptions);
+                    
+                    // Set initial state for animation
+                    storyCards.forEach(card => {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        alumniObserver.observe(card);
+                    });
                 });
             </script>
         </section>

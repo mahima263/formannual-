@@ -549,13 +549,12 @@
             color: #B04B34;
         }
 
-        /* New Hero Section with Form - FIXED BANNER */
+        /* New Hero Section with Form - FIXED BANNER CUTTING */
         .new-hero-section {
             position: relative;
             padding: 0;
             min-height: auto;
             overflow: hidden;
-            background: #f8f9fa; /* Fallback for mobile */
         }
 
         .hero-banner {
@@ -581,19 +580,17 @@
             margin: 0 auto;
         }
 
-        /* Desktop view - FIXED BANNER */
+        /* Desktop view - FIXED BANNER POSITIONING */
         @media (min-width: 992px) {
             .new-hero-section {
                 padding: 80px 0;
                 background: 
-                    
-                    url('dbanner1.jpeg') left center/cover no-repeat;
-                /* FIXED: Changed from auto 100% to cover */
-                min-height: 900px; /* Fixed height */
-                height: 900px; /* Explicit height */
+                    linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 30%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%),
+                    url('AG26.jpg') center left/auto 100% no-repeat;
+                min-height: 700px; /* Reduced from 900px */
                 display: flex;
                 align-items: center;
-                background-color: #f8f9fa;
+                background-color: #f8f9fa; /* Fallback color */
             }
 
             .hero-banner {
