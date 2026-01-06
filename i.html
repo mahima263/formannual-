@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Flag Icon CSS (FIX FOR FLAG DISPLAY ISSUE) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 
     <!-- Donation Form Styles -->
     <style>
@@ -43,7 +46,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
+            z-index: 10000;
             justify-content: center;
             align-items: center;
         }
@@ -74,6 +77,14 @@
             font-weight: 700;
             color: #B04B34;
             margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .payment-modal-title .flag-icon {
+            font-size: 18px;
+            vertical-align: middle;
         }
 
         .close-modal {
@@ -277,54 +288,77 @@
             font-weight: 600;
         }
 
-        /* Country Selection */
+        /* Country Selection - PROMINENT */
         .country-select-container {
-            margin: 20px 0;
+            margin: 25px 0;
             position: relative;
+        }
+
+        .country-select-label {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            color: #B04B34;
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+
+        .country-select-label .required-star {
+            color: #ff0000;
+            margin-left: 3px;
         }
 
         .dropdown {
             position: relative;
             width: 100%;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            border: 2px solid #B04B34;
+            border-radius: 10px;
             background: white;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dropdown:hover {
+            border-color: #8c3a2a;
+            box-shadow: 0 0 0 3px rgba(176, 75, 52, 0.1);
         }
 
         .dropdown-selected {
-            padding: 12px 15px;
-            font-size: 15px;
+            padding: 15px 20px;
+            font-size: 16px;
             color: #333;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: 500;
         }
 
         .dropdown-selected::after {
             content: "▼";
             font-size: 12px;
-            color: #666;
+            color: #B04B34;
             transition: transform 0.3s;
+            font-weight: bold;
         }
 
         .dropdown.active .dropdown-selected::after {
             transform: rotate(180deg);
+            color: #8c3a2a;
         }
 
         .dropdown-options {
             display: none;
             position: absolute;
-            top: 100%;
+            top: calc(100% + 5px);
             left: 0;
             right: 0;
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            max-height: 250px;
+            border: 2px solid #B04B34;
+            border-radius: 10px;
+            max-height: 300px;
             overflow-y: auto;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            box-shadow: 0 10px 25px rgba(176, 75, 52, 0.15);
         }
 
         .dropdown.active .dropdown-options {
@@ -332,16 +366,29 @@
         }
 
         .option {
-            padding: 10px 15px;
+            padding: 12px 20px;
             border-bottom: 1px solid #f0f0f0;
             transition: background 0.2s;
-            font-size: 14px;
+            font-size: 15px;
             display: flex;
             align-items: center;
+            color: #333;
         }
 
         .option:hover {
             background: #f8e6e2;
+            color: #B04B34;
+        }
+
+        .option:last-child {
+            border-bottom: none;
+        }
+
+        .option .flag-icon {
+            margin-right: 10px;
+            width: 20px;
+            height: 15px;
+            border-radius: 2px;
         }
 
         /* Donation Form Container */
@@ -349,7 +396,7 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 25px;
             max-width: 450px;
             width: 100%;
             margin: 20px 0;
@@ -386,13 +433,14 @@
 
         .step-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .step-header h2 {
             color: #B04B34;
-            font-size: 20px;
-            margin-bottom: 5px;
+            font-size: 22px;
+            margin-bottom: 8px;
+            font-weight: 700;
         }
 
         .step-header p {
@@ -417,9 +465,9 @@
         }
 
         .btn {
-            padding: 10px 25px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -444,6 +492,8 @@
         .btn-next:hover,
         .btn-submit:hover {
             background: #8c3a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(176, 75, 52, 0.2);
         }
 
         .form-group {
@@ -475,9 +525,9 @@
         input[type="tel"],
         input[type="number"] {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px 15px;
             border: 2px solid #ddd;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 14px;
             transition: border 0.3s;
         }
@@ -488,6 +538,7 @@
         input[type="number"]:focus {
             border-color: #B04B34;
             outline: none;
+            box-shadow: 0 0 0 3px rgba(176, 75, 52, 0.1);
         }
 
         .radio-group {
@@ -511,30 +562,25 @@
             color: #B04B34;
         }
 
-        /* New Hero Section with Form - REVISED FOR RESPONSIVE */
+        /* New Hero Section with Form - FIXED BANNER */
         .new-hero-section {
             position: relative;
-            padding: 80px 0;
-            background: 
-                linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0.7) 55%, transparent 65%),
-                url('dbanner.jpeg') right center/cover no-repeat;
-            min-height: 700px;
-            display: flex;
-            align-items: center;
+            padding: 0;
+            min-height: auto;
+            overflow: hidden;
+            background: #f8f9fa; /* Fallback for mobile */
         }
 
         .hero-banner {
             width: 100%;
-            height: 400px;
             overflow: hidden;
             position: relative;
         }
 
         .hero-banner img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            height: auto;
+            display: block;
         }
 
         .hero-content {
@@ -545,29 +591,117 @@
         .hero-form-container {
             width: 100%;
             max-width: 450px;
-            margin-left: auto;
+            margin: 0 auto;
         }
 
-        /* Mobile banner */
-        @media (max-width: 991px) {
+        /* Desktop view - FIXED BANNER with Text Overlay */
+        @media (min-width: 992px) {
             .new-hero-section {
-                padding: 0;
-                background: #f8f9fa;
-                min-height: auto;
+                padding: 80px 0;
+                background: 
+                    url('Annual Giving (1).jpg') left center/cover no-repeat;
+                min-height: 900px; /* Fixed height */
+                height: 400px; /* Explicit height */
+                display: flex;
+                align-items: center;
+                background-color: #f8f9fa;
+                position: relative;
             }
 
             .hero-banner {
-                display: block;
-                height: 300px;
+                display: none;
             }
 
             .hero-content {
-                padding: 40px 0;
-                background: #f8f9fa;
+                padding: 0;
+                background: transparent;
+                width: 100%;
+                position: relative;
+                z-index: 2;
             }
 
             .hero-form-container {
-                margin: 0 auto;
+                margin-left: auto;
+                margin-right: 0;
+                margin-top: 0;
+                position: relative;
+                z-index: 2;
+            }
+            
+            /* Ensure container has proper width */
+            .container.hero-content {
+                max-width: 1200px;
+                padding-right: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                height: 100%;
+            }
+            
+            /* Banner Text Overlay - Left Side - REVISED FOR PROMINENT VISION & IMPACT */
+            .banner-text-overlay {
+                position: absolute;
+                left: 50px;
+                top: 50%;
+                transform: translateY(-50%);
+                max-width: 650px;
+                z-index: 1;
+                color: white;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            }
+            
+            .banner-text-overlay .main-title {
+                font-size: 6rem;
+                font-weight: 800;
+                margin-bottom: 0;
+                line-height: 1;
+                letter-spacing: -1px;
+            }
+            
+            .banner-text-overlay .subtitle-line {
+                display: flex;
+                align-items: center;
+                font-size: 2.2rem;
+                font-weight: 600;
+                margin-top: 15px;
+                opacity: 0.95;
+            }
+            
+            .banner-text-overlay .small-text {
+                font-size: 2.8rem;
+                font-weight: 400;
+                opacity: 1;
+                margin: 0 15px;
+            }
+            
+            .banner-text-overlay .large-text {
+                font-size: 4rem;
+                font-weight: 800;
+                color: #ffffff;
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+                margin: 0 10px;
+                position: relative;
+            }
+            
+            .banner-text-overlay .year {
+                font-size: 2.2rem;
+                font-weight: 700;
+                color: #ffffff;
+                margin-top: 25px;
+                display: inline-block;
+                padding: 10px 30px;
+                background: rgba(176, 75, 52, 0.9);
+                border-radius: 10px;
+                letter-spacing: 2px;
+            }
+            
+            .banner-text-overlay .tagline {
+                font-size: 1.4rem;
+                margin-top: 30px;
+                font-weight: 500;
+                opacity: 0.9;
+                max-width: 550px;
+                line-height: 1.5;
             }
         }
 
@@ -632,25 +766,284 @@
             padding-right: 35px !important;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 1200px) {
-            .new-hero-section {
-                background: 
-                    linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.7) 60%, transparent 70%),
-                    url('dbanner.jpeg') right center/cover no-repeat;
+        /* ===============================
+           MOBILE VIEW BANNER & FORM SPACING FIX
+        ================================ */
+        @media (max-width: 992px) {
+            /* Banner image height and spacing fix */
+            .hero-banner {
+                height: auto;
+                margin-bottom: 0;
+            }
+            
+            .hero-banner img {
+                height: 280px !important; /* Reduced height */
+                object-fit: cover;
+                object-position: center;
+            }
+            
+            /* Reduce top spacing for form container */
+            .hero-content {
+                padding: 10px 0 !important; /* Reduced padding */
+                margin-top: 0;
             }
             
             .hero-form-container {
-                max-width: 400px;
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            
+            /* Donation form container adjustments */
+            .donation-form-container {
+                margin-top: 15px !important;
+                padding: 20px 15px !important;
             }
         }
 
-        @media (max-width: 992px) {
-            .hero-banner {
-                height: 350px;
+        @media (max-width: 768px) {
+            /* Further reduce spacing on smaller screens */
+            .hero-banner img {
+                height: 240px !important;
+            }
+            
+            .hero-content {
+                padding: 5px 0 !important;
+            }
+            
+            .donation-form-container {
+                margin-top: 10px !important;
+                padding: 15px 12px !important;
+            }
+            
+            /* Fix for the "From Vision to Impact" section */
+            .uniquegoal-section {
+                padding: 25px 20px !important;
+            }
+            
+            .uniquegoal-section .d-flex.justify-content-between {
+                flex-direction: column !important;
+                gap: 25px !important; /* Increased gap */
+                margin-bottom: 25px !important;
+            }
+            
+            .uniquegoal-section .text-start,
+            .uniquegoal-section .text-end {
+                text-align: center !important;
+                width: 100%;
+            }
+            
+            .uniquegoal-section .text-start {
+                order: 1;
+            }
+            
+            .uniquegoal-section .text-end {
+                order: 2;
+            }
+            
+            /* Increase font sizes for better readability */
+            .uniquegoal-section .fw-bold h6 {
+                font-size: 1.4rem !important;
+            }
+            
+            .uniquegoal-section .text-muted.small {
+                font-size: 1rem !important;
+                margin-bottom: 5px;
+                color: #666 !important;
+            }
+            
+            /* Progress bar container adjustments */
+            .uniquegoal-progress-container {
+                height: 28px !important; /* Slightly taller */
+                margin: 25px 0 !important; /* More spacing */
+            }
+            
+            /* Contributors count adjustment */
+            .contributors-count {
+                margin: 25px auto !important;
+                padding: 10px 25px !important;
+            }
+            
+            .contributor-number {
+                font-size: 1.3rem !important;
+            }
+            
+            .contributors-text {
+                font-size: 1.1rem !important;
             }
         }
 
+        @media (max-width: 576px) {
+            /* Extra small screens */
+            .hero-banner img {
+                height: 220px !important;
+            }
+            
+            .donation-form-container {
+                margin-top: 5px !important;
+                padding: 12px 10px !important;
+                border-radius: 10px !important;
+            }
+            
+            /* Step headers */
+            .step-header {
+                margin-bottom: 15px !important;
+            }
+            
+            .step-header h2 {
+                font-size: 1.4rem !important;
+            }
+            
+            .step-header p {
+                font-size: 0.9rem !important;
+            }
+            
+            /* Vision to Impact section - extra spacing */
+            .uniquegoal-section {
+                padding: 20px 15px !important;
+                margin: 10px 0 !important;
+            }
+            
+            .uniquegoal-heading {
+                font-size: 1.2rem !important;
+                line-height: 1.4 !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .uniquegoal-section .d-flex.justify-content-between {
+                gap: 20px !important;
+                margin-bottom: 20px !important;
+            }
+            
+            /* Progress text more prominent */
+            .uniquegoal-progress-text {
+                font-size: 0.9rem !important;
+                font-weight: 800 !important;
+                padding: 3px 8px !important;
+            }
+        }
+
+        @media (max-width: 400px) {
+            /* Very small screens */
+            .hero-banner img {
+                height: 200px !important;
+            }
+            
+            .donation-form-container {
+                margin-top: 0 !important;
+                padding: 10px 8px !important;
+            }
+            
+            /* Form elements adjustments */
+            .country-select-label {
+                font-size: 0.95rem !important;
+            }
+            
+            .dropdown-selected {
+                padding: 10px 12px !important;
+                font-size: 0.95rem !important;
+            }
+            
+            .amount-option {
+                padding: 12px 5px !important;
+                font-size: 0.9rem !important;
+                min-width: calc(50% - 5px) !important;
+            }
+            
+            /* Vision section text adjustments */
+            .uniquegoal-section .fw-bold h6 {
+                font-size: 1.3rem !important;
+            }
+            
+            .uniquegoal-section .text-muted.small {
+                font-size: 0.95rem !important;
+            }
+        }
+
+        /* Additional fix for the unique goal section on mobile */
+        @media (max-width: 768px) {
+            .about-season-image-wrapper {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            
+            .uniquegoal-section {
+                margin-top: 15px !important;
+                margin-bottom: 15px !important;
+            }
+            
+            /* Ensure proper spacing between elements */
+            .uniquegoal-heading {
+                margin-bottom: 20px !important;
+            }
+            
+            .timeline-text {
+                margin-bottom: 25px !important;
+                display: block;
+            }
+            
+            /* Donation message spacing */
+            .donation-message {
+                margin-top: 20px !important;
+                margin-bottom: 20px !important;
+            }
+            
+            .donation-line {
+                font-size: 1rem !important;
+                margin-bottom: 8px !important;
+            }
+            
+            /* Note text adjustments */
+            .note-text {
+                padding: 12px 10px !important;
+                font-size: 0.85rem !important;
+                line-height: 1.4 !important;
+                margin-top: 20px !important;
+            }
+        }
+
+        /* Fix for banner text overlay if it appears in mobile */
+        .banner-text-overlay {
+            display: none !important;
+        }
+
+        @media (min-width: 993px) {
+            .banner-text-overlay {
+                display: block !important;
+            }
+        }
+
+        /* Mobile donate button spacing fix */
+        @media (max-width: 768px) {
+            #mobileDonateBtn {
+                z-index: 99999; /* Ensure it's above everything */
+            }
+            
+            /* When donate button is clicked and form appears, adjust spacing */
+            .new-hero-section:target .hero-content {
+                padding-top: 80px !important; /* Account for fixed header */
+            }
+        }
+
+        /* Fix for country dropdown flag display issue on mobile */
+        .flag-icon {
+            display: inline-block !important;
+            width: 20px !important;
+            height: 15px !important;
+            background-size: contain !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            margin-right: 8px !important;
+            vertical-align: middle !important;
+        }
+
+        /* Ensure proper flag display in dropdown */
+        .option .flag-icon {
+            display: inline-block !important;
+            width: 20px !important;
+            height: 15px !important;
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
             .form-row {
                 flex-direction: column;
@@ -658,7 +1051,7 @@
             }
 
             .donation-form-container {
-                padding: 15px;
+                padding: 20px;
             }
 
             .amount-option {
@@ -668,9 +1061,18 @@
             .other-option-box {
                 min-width: 100%;
             }
-
-            .hero-banner {
-                height: 300px;
+            
+            .hero-banner img {
+                height: 350px;
+            }
+            
+            .country-select-label {
+                font-size: 15px;
+            }
+            
+            .dropdown-selected {
+                padding: 12px 15px;
+                font-size: 15px;
             }
         }
 
@@ -690,12 +1092,16 @@
                 gap: 10px;
             }
 
-            .hero-banner {
-                height: 250px;
+            .hero-banner img {
+                height: 300px;
             }
 
             .hero-content {
                 padding: 30px 0;
+            }
+            
+            .step-header h2 {
+                font-size: 20px;
             }
         }
 
@@ -705,8 +1111,12 @@
                 min-width: 100%;
             }
 
-            .hero-banner {
-                height: 220px;
+            .hero-banner img {
+                height: 250px;
+            }
+            
+            .donation-form-container {
+                padding: 15px;
             }
         }
     </style>
@@ -746,10 +1156,15 @@
     </header>
 
     <!-- Hero Section with Form - REVISED STRUCTURE -->
-    <section id="donation-form" class="new-hero-section">
+    <section id="donation-form" class="new-hero-section" style="scroll-margin-top: 80px;">
+        <!-- Banner Text Overlay (Desktop Only) -->
+        <div class="banner-text-overlay d-none d-lg-block">
+            
+        </div>
+        
         <!-- Banner Image (Visible on Mobile) -->
         <div class="hero-banner d-block d-lg-none">
-            <img src="banner.jpeg" alt="Season of Giving Banner" class="img-fluid">
+            <img src="AG26.jpg" alt="Season of Giving Banner" class="img-fluid">
         </div>
 
         <!-- Hero Content with Form -->
@@ -761,21 +1176,43 @@
                     <div id="step1" class="form-step active">
                         <div class="step-header">
                             <h2>Choose Your Impact</h2>
-                            <p>Select country and donation details</p>
+                            <p>Select donation type and amount</p>
                         </div>
 
-                        <!-- Country Selection -->
+                        <!-- Country Selection - PROMINENT -->
                         <div class="country-select-container">
+                            <div class="country-select-label">
+                                Select Country <span class="required-star">*</span>
+                            </div>
                             <div class="dropdown country-dropdown">
-                                <div class="dropdown-selected">Choose Country *</div>
+                                <div class="dropdown-selected">
+                                    <span class="flag-icon flag-icon-in"></span> India
+                                </div>
                                 <div class="dropdown-options">
-                                    <div class="option" data-value="india">🇮🇳 India</div>
-                                    <div class="option" data-value="usa">🇺🇸 United States</div>
-                                    <div class="option" data-value="australia">🇦🇺 Australia</div>
-                                    <div class="option" data-value="uk">🇬🇧 United Kingdom</div>
-                                    <div class="option" data-value="canada">🇨🇦 Canada</div>
-                                    <div class="option" data-value="germany">🇩🇪 Germany</div>
-                                    <div class="option" data-value="belgium">🇧🇪 Belgium</div>
+                                    <div class="option" data-value="india" data-country-code="in">
+                                        <span class="flag-icon flag-icon-in"></span> India
+                                    </div>
+                                    <div class="option" data-value="usa" data-country-code="us">
+                                        <span class="flag-icon flag-icon-us"></span> United States
+                                    </div>
+                                    <div class="option" data-value="australia" data-country-code="au">
+                                        <span class="flag-icon flag-icon-au"></span> Australia
+                                    </div>
+                                    <div class="option" data-value="uk" data-country-code="gb">
+                                        <span class="flag-icon flag-icon-gb"></span> United Kingdom
+                                    </div>
+                                    <div class="option" data-value="canada" data-country-code="ca">
+                                        <span class="flag-icon flag-icon-ca"></span> Canada
+                                    </div>
+                                    <div class="option" data-value="germany" data-country-code="de">
+                                        <span class="flag-icon flag-icon-de"></span> Germany
+                                    </div>
+                                    <div class="option" data-value="belgium" data-country-code="be">
+                                        <span class="flag-icon flag-icon-be"></span> Belgium
+                                    </div>
+                                    <div class="option" data-value="other" data-country-code="globe">
+                                        <i class="fas fa-globe-americas"></i> Other Country
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -788,10 +1225,10 @@
                                 <div class="donation-type-option" data-type="monthly">Monthly Donation</div>
                             </div>
 
-                            <!-- One-time Amount Options (Initially Visible) -->
+                            <!-- One-time Amount Options -->
                             <div class="amount-options-simple" id="onetime-amounts">
-                                <div class="amount-option" data-amount="2500">₹2,500</div>
-                                <div class="amount-option" data-amount="5000">₹5,000</div>
+                                <div class="amount-option" data-amount="50000">₹50,000</div>
+                                <div class="amount-option" data-amount="25000">₹25,000</div>
                                 <div class="amount-option" data-amount="10000">₹10,000</div>
                                 <div class="other-option-box" id="onetime-other-option-box">
                                     <span class="currency-symbol">₹</span>
@@ -801,9 +1238,9 @@
 
                             <!-- Monthly Amount Options (Initially Hidden) -->
                             <div class="amount-options-simple" id="monthly-amounts" style="display: none;">
-                                <div class="amount-option" data-amount="500">₹500</div>
-                                <div class="amount-option" data-amount="1000">₹1,000</div>
                                 <div class="amount-option" data-amount="10000">₹10,000</div>
+                                <div class="amount-option" data-amount="5000">₹5,000</div>
+                                <div class="amount-option" data-amount="1000">₹1000</div>
                                 <div class="other-option-box" id="monthly-other-option-box">
                                     <span class="currency-symbol">₹</span>
                                     <input type="number" id="monthly-customAmountInput" placeholder="Other" min="1">
@@ -820,10 +1257,23 @@
                                     <div class="donation-type-badge" id="selectedTypeDisplay">One-time</div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="info-note">
-                                <strong>Note:</strong> Your donation will go towards supporting students' most urgent requirements.
+                        <!-- Other Countries Content (Initially Hidden) -->
+                        <div id="other-country-content" style="display: none;">
+                            <!-- Donation Type Toggle for Other Countries -->
+                            <div class="donation-type-toggle">
+                                <div class="donation-type-option active" data-type="one-time">One-time Donation</div>
+                                <div class="donation-type-option" data-type="monthly">Monthly Donation</div>
                             </div>
+                            
+                            <div class="info-note">
+                                <strong>Note:</strong> You will be redirected to our secure payment partner's website for your selected country.
+                            </div>
+                        </div>
+
+                        <div class="info-note" id="global-note">
+                            <strong>Note:</strong> Your donation will go towards supporting students' most urgent requirements.
                         </div>
 
                         <div class="form-actions" style="display:flex; justify-content:center; margin-top:15px;">
@@ -933,7 +1383,6 @@
                                             <span class="radio-label">No</span>
                                         </label>
                                     </div>
-                                </div>
                             </div>
 
                             <div class="form-actions">
@@ -952,7 +1401,12 @@
     <div id="paymentModal" class="payment-modal">
         <div class="payment-modal-content">
             <div class="payment-modal-header">
-                <h2 class="payment-modal-title" id="modalCountryTitle"></h2>
+                <h2 class="payment-modal-title" id="modalCountryTitle">
+                    <span id="modalCountryIcon"></span>
+                    <span id="modalCountryName"></span>
+                    <span id="modalDonationType"></span>
+                    Payment Instructions
+                </h2>
                 <button class="close-modal" onclick="closePaymentModal()">&times;</button>
             </div>
             <div id="modalContent"></div>
@@ -1109,6 +1563,23 @@
             border-bottom: none !important;
             text-decoration: none !important;
         }
+        
+        /* Flag icon specific styles */
+        .flag-icon {
+            display: inline-block;
+            width: 20px;
+            height: 15px;
+            background-size: contain;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            margin-right: 8px;
+        }
+        
+        .option .fas.fa-globe-americas {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
     </style>
 
     <main class="main">
@@ -1123,21 +1594,17 @@
                             </h4>
 
                             <p class="fs-5">
-                                Annual Giving is how the IIT Kanpur community comes together. Alumni, faculty, friends,
-                                and well-wishers to strengthen the Institute we all believe in. Every contribution
-                                supports students, empowers faculty, and advances the ideas and innovations that define
-                                IIT Kanpur.
+                                Annual Giving is how the IIT Kanpur community comes together. Alumni, faculty, friends, and well-wishers to strengthen the Institute we all believe in. Every contribution supports students, empowers faculty, and advances the ideas and innovations that define IIT Kanpur.
+
+                              
+                              
                             </p>
                             <p class="fs-5">
-                                Last year marked a bold step towards strengthening IIT Kanpur's global impact. The
-                                Institute's ambitious $600M campaign has already gained remarkable momentum, with 46% of
-                                the target committed, including 11% from our alumni. This progress is made possible by
-                                the commitment and support of the IITK community.
+                                Last year marked a bold step towards strengthening IIT Kanpur's global impact. This progress is made possible by the commitment and support of the IITK community.
                             </p>
                             <p class="fs-5">
-                                When you give annually, you don't just support a cause you sustain momentum. With each
-                                gift, you become an active partner in shaping the Institute's future and carrying its
-                                legacy forward.
+                                 
+                                When you give annually, you don't just support a cause you sustain momentum. With each gift, you become an active partner in shaping the Institute's future and carrying its legacy forward.
 
                             </p>
                         </div>
@@ -1150,7 +1617,7 @@
                                     From Vision to Impact:<br> Together, We Make It Happen
                                 </h5>
                     
-                                <p class="timeline-text mb-4">(<strong>by December 2025</strong>)</p>
+                                <p class="timeline-text mb-4">(<strong>by March 2026</strong>)</p>
                     
                                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
                                     
@@ -1195,7 +1662,7 @@
                                 </div>
                     
                                 <p class="note-text mt-3 mb-0">
-                                    <strong>Note:</strong> Online donations reflect within 5–7 working days;
+                                    <strong>Note (Outside India):</strong> Online donations reflect within 5–7 working days;
                                     cheque donations may take up to 30 days.
                                 </p>
                     
@@ -1775,258 +2242,376 @@
             </style>
         </section>
 
-        <!-- Testimonials Section -->
-        <section id="voices" class="voicestest">
-            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-                <h2 class="fw-bold display-6 mb-4 text-center">Voices of Generosity</h2>
-                <div class="carousel-inner container">
-                    <div class="carousel-item active">
-                        <div class="testimonial">
-                            <img src="testimonials/Abhay_Bhushan.png" alt="Abhay Bhushan">
-                            <div class="testimonial-text">
-                                <div class="testimonial-name">Mr. Abhay K. Bhushan</div>
-                                <div class="testimonial-title">B.Tech/EE/1965<br />Chairman, Asquare, Inc.</div>
-                                <div class="quote-icon"><i class="bi bi-quote open-quote"></i></div>
-                                <p>Being from the first batch of IIT Kanpur, filled me with hope and a can-do spirit
-                                    which helped me in developing the Internet and I am grateful to IIT Kanpur for this
-                                    and I want to continue giving back, both individually and collectively. I encourage
-                                    all alumni to give back. TOGETHER WE CAN!</p>
-                                <div class="quote-icon text-end"> <i class="bi bi-quote close-quote"></i></div>
+        <!-- Stories Section - COMPLETELY FIXED MOBILE VIEW -->
+        <section id="stories" class="testimonials section" style="padding: 60px 0;">
+            <div class="container">
+                <div class="section-header text-center mb-5">
+                    <h1 class="fw-bold" style="color: #2d3748; font-size: 2.5rem;">Stories of Change</h1>
+                </div>
+
+                <!-- Desktop Grid View -->
+                <div class="row g-4 d-none d-md-flex">
+                    <!-- Story 1 -->
+                    <div class="col-md-4">
+                        <div class="story-card h-100">
+                            <div class="story-image">
+                                <img src="Anshika (1).jpg" alt="Anshika - IIT Kanpur Student" class="img-fluid">
+                            </div>
+                            <div class="story-content p-4">
+                                <h3 class="story-title">A Timely Gift, A Stronger Future</h3>
+                                <p class="story-text">Coming from a small farming family in rural Uttar Pradesh, Anshika knew early what financial uncertainty felt like. While a tuition fee waiver helped her enter IIT Kanpur, daily expenses like mess bills, electricity charges, and a failing laptop became overwhelming. At a critical moment, alumni support arrived. Pending dues were cleared, her laptop was repaired, and for the first time in months, Anshika could focus fully on her academics and placement preparation. This timely support restored not just stability, but confidence. Inspired by alumni generosity, she now dreams of giving back just as she was supported.</p>
+                                
+                                <div class="story-stats row mt-3">
+                                    <div class="col-12 text-center">
+                                        <div class="stat-value">Anshika Singh</div>
+                                        <div class="stat-label">B.Tech, IITK Student</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                   
-                    <div class="carousel-item">
-                        <div class="testimonial">
-                            <img src="testimonials/Dhanraj K Chokappa.jpg" alt="Mr. Gokul Rajaram">
-                            <div class="testimonial-text">
-                                <div class="testimonial-name">Mr. Dhanraj K. Chokappa|</div>
-                                <div class="testimonial-title">(BT/CHE/1982),<br /> Independent Consultant. Retired from Unilever R&amp;D Bangalore</div>
-                                <div class="quote-icon"><i class="bi bi-quote open-quote"></i></div>
-                                <p>My five years as a BTech student from 1977 to 1982 provided a strong foundation for
-                                    my subsequent achievements. One enduring memory is of my roommate during the
-                                    first three years, who, despite coming from a humble rural background, cleared the
-                                    JEE through his own efforts. Fortunately, tuition and hostel fees were very nominal at
-                                    that time. With a merit cum means scholarship, he graduated with good grades and
-                                    is now well-settled abroad. Today, tuition fees and other expenses are beyond the
-                                    reach of many deserving students. Helping such students is my primary motivation to
-                                    give back to IITK.</p>
-                                <div class="quote-icon text-end"> <i class="bi bi-quote close-quote"></i></div>
+                    
+                    <!-- Story 2 -->
+                    <div class="col-md-4">
+                        <div class="story-card h-100">
+                            <div class="story-image">
+                                <img src="Aerial Robotics Win.jpeg" alt="Team Aerial Robotics" class="img-fluid">
+                            </div>
+                            <div class="story-content p-4">
+                                <h3 class="story-title">From Campus to Global Champions</h3>
+                                <p class="story-text">When Team Aerial Robotics qualified for the global finals at ICUAS 2025 in the United States, travel costs stood between them and the world stage. Alumni stepped in. With support from the IITK Alumni Association (Outer Delhi Chapter), the team represented IIT Kanpur internationally and returned as global winners. Competing against top teams from across continents, their first-place finish showcased what becomes possible when alumni invest in student ambition. This victory is a powerful reminder: alumni support doesn't just fund travel, it fuels global excellence and institutional pride.</p>
+                                
+                                <div class="story-stats row mt-3">
+                                    <div class="col-12 text-center">
+                                        <div class="stat-value text-center">Team Aerial Robotics</div>
+                                        <div class="stat-label text-center">Winners ICUAS 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Story 3 -->
+                    <div class="col-md-4">
+                        <div class="story-card h-100">
+                            <div class="story-image">
+                                <img src="Mr.Gaurav Swarnkar.jpg" alt="Gaurav Swarnkar - Para-Athlete" class="img-fluid">
+                            </div>
+                            <div class="story-content p-4">
+                                <h3 class="story-title">Empowering Ability Through Giving</h3>
+                                <p class="story-text">Gaurav Swarnkar's journey in para-athletics is defined by determination and strengthened by support. With financial assistance from the Cell for Differently Abled Persons (CDAP), Gaurav accessed training and competition opportunities that transformed effort into achievement. His medals at state and national para-athletics championships stand as proof of what targeted support can unlock. Alumni and institutional backing helped convert talent into podium finishes, reinforcing a powerful truth: when barriers are removed, potential rises. Gaurav's success reflects the lasting impact of inclusive and purpose-driven giving.</p>
+                                
+                                <div class="story-stats row mt-3">
+                                    <div class="col-12 text-center">
+                                        <div class="stat-value">Gaurav Swarnkar</div>
+                                        <div class="stat-label">Winner Para Athletics 2025</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden=" true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-                <div class="carousel-indicators mt-4">
-                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"
-                        aria-current="true"></button>
-                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+
+                <!-- Mobile Carousel View -->
+                <div class="d-md-none">
+                    <div id="storiesCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <!-- Story 1 -->
+                            <div class="carousel-item active">
+                                <div class="story-card">
+                                    <div class="story-image">
+                                        <img src="Anshika (1).jpg" alt="Anshika - IIT Kanpur Student" class="img-fluid">
+                                    </div>
+                                    <div class="story-content p-4">
+                                        <h3 class="story-title">A Timely Gift, A Stronger Future</h3>
+                                        <p class="story-text">Coming from a small farming family in rural Uttar Pradesh, Anshika knew early what financial uncertainty felt like. While a tuition fee waiver helped her enter IIT Kanpur, daily expenses like mess bills, electricity charges, and a failing laptop became overwhelming. At a critical moment, alumni support arrived. Pending dues were cleared, her laptop was repaired, and for the first time in months, Anshika could focus fully on her academics and placement preparation. This timely support restored not just stability, but confidence. Inspired by alumni generosity, she now dreams of giving back just as she was supported.</p>
+                                        
+                                        <div class="story-stats row mt-3">
+                                            <div class="col-12 text-center">
+                                                <div class="stat-value">Anshika Singh</div>
+                                                <div class="stat-label">B.Tech, IITK Student</div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Story 2 -->
+                            <div class="carousel-item">
+                                <div class="story-card">
+                                    <div class="story-image">
+                                        <img src="Aerial Robotics Win.jpeg" alt="Team Aerial Robotics" class="img-fluid">
+                                    </div>
+                                    <div class="story-content p-4">
+                                        <h3 class="story-title">From Campus to Global Champions</h3>
+                                        <p class="story-text">When Team Aerial Robotics qualified for the global finals at ICUAS 2025 in the United States, travel costs stood between them and the world stage. Alumni stepped in. With support from the IITK Alumni Association (Outer Delhi Chapter), the team represented IIT Kanpur internationally and returned as global winners. Competing against top teams from across continents, their first-place finish showcased what becomes possible when alumni invest in student ambition. This victory is a powerful reminder: alumni support doesn't just fund travel, it fuels global excellence and institutional pride.</p>
+                                        
+                                        <div class="story-stats row mt-3">
+                                            <div class="col-12 text-center">
+                                                <div class="stat-value text-center">Team Aerial Robotics</div>
+                                                <div class="stat-label text-center">Winners ICUAS 2025</div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Story 3 -->
+                            <div class="carousel-item">
+                                <div class="story-card">
+                                    <div class="story-image">
+                                        <img src="Mr.Gaurav Swarnkar.jpg" alt="Gaurav Swarnkar - Para-Athlete" class="img-fluid">
+                                    </div>
+                                    <div class="story-content p-4">
+                                        <h3 class="story-title">Empowering Ability Through Giving</h3>
+                                        <p class="story-text">Gaurav Swarnkar's journey in para-athletics is defined by determination and strengthened by support. With financial assistance from the Cell for Differently Abled Persons (CDAP), Gaurav accessed training and competition opportunities that transformed effort into achievement. His medals at state and national para-athletics championships stand as proof of what targeted support can unlock. Alumni and institutional backing helped convert talent into podium finishes, reinforcing a powerful truth: when barriers are removed, potential rises. Gaurav's success reflects the lasting impact of inclusive and purpose-driven giving.</p>
+                                        
+                                        <div class="story-stats row mt-3">
+                                            <div class="col-12 text-center">
+                                                <div class="stat-value">Gaurav Swarnkar</div>
+                                                <div class="stat-label">Winner Para Athletics 2025</div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Carousel Controls -->
+                        
+                        
+                        <!-- Carousel Indicators -->
+                        <div class="carousel-indicators mt-3">
+                            <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                            <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="2"></button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
             <style>
-                .voicestest {
-                    background-color: #fff;
-                    padding: 60px 0;
+                /* Stories Section Styles */
+                .story-card {
+                    background: white;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 10px 30px rgba(176, 75, 52, 0.1);
+                    border: 1px solid rgba(176, 75, 52, 0.1);
+                    height: 100%;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
                 }
-
-                .testimonial {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: 40px;
+                
+                .story-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 15px 40px rgba(176, 75, 52, 0.15);
                 }
-
-                .testimonial-text {
-                    flex: 1;
+                
+                .story-image {
+                    height: 250px;
+                    overflow: hidden;
                 }
-
-                .testimonial-text p {
-                    font-size: 1rem;
-                    color: #0f0f0f;
-                    line-height: 1.7;
+                
+                .story-image img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
                 }
-
-                .quote-icon {
-                    font-size: 40px;
-                    color: #b04b344f;
-                    line-height: 1;
-                    display: block;
+                
+                .story-card:hover .story-image img {
+                    transform: scale(1.05);
                 }
-
-                .open-quote {
-                    font-size: 30px;
-                    color: #b04b34cd;
-                    display: inline-block;
-                    line-height: 0.5;
-                    margin-bottom: 10px;
+                
+                .story-content {
+                    padding: 25px;
                 }
-
-                .close-quote {
-                    font-size: 30px;
-                    color: #b04b34b9;
-                    transform: rotate(180deg) translateY(5px);
-                    display: inline-block;
-                    line-height: 0.5;
-                    margin-top: 10px;
-                }
-
-                .testimonial-name {
+                
+                .story-title {
+                    color: #2d3748;
+                    font-size: 1.4rem;
                     font-weight: 700;
-                    font-size: 1.2rem;
+                    margin-bottom: 15px;
+                    line-height: 1.3;
+                }
+                
+                .story-text {
+                    color: #5a6268;
+                    line-height: 1.6;
+                    margin-bottom: 20px;
+                }
+                
+                .story-stats {
+                    border-top: 1px solid #f0e9e6;
+                    padding-top: 15px;
+                }
+                
+                .stat-value {
+                    color: #B04B34;
+                    font-weight: 700;
+                    font-size: 1.1rem;
+                    margin-bottom: 5px;
+                }
+                
+                .stat-label {
+                    color: #8a7f7a;
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                }
+                
+                /* Carousel Styles for Mobile */
+                #storiesCarousel {
+                    position: relative;
+                }
+                
+                #storiesCarousel .carousel-indicators {
+                    position: static;
                     margin-top: 20px;
-                    border-bottom: 2px solid #B04B34;
-                    display: inline-block;
-                    padding-bottom: 2px;
                 }
-
-                .testimonial-title {
-                    font-size: 0.95rem;
-                    color: #555;
-                    margin-top: 5px;
-                }
-
-                .testimonial img {
-                    width: 250px;
-                    height: auto;
-                    border-radius: 10px;
-                    object-fit: contain;
-                }
-
-                .carousel-indicators [data-bs-target] {
-                    background-color: #B04B34;
-                    width: 12px;
-                    height: 12px;
+                
+                #storiesCarousel .carousel-indicators button {
+                    width: 10px;
+                    height: 10px;
                     border-radius: 50%;
+                    background-color: #ccc;
                     margin: 0 5px;
+                    border: none;
                 }
-
-                .carousel-indicators {
-                    bottom: -50px;
+                
+                #storiesCarousel .carousel-indicators button.active {
+                    background-color: #B04B34;
                 }
-
-                @media (max-width: 992px) {
-                    .testimonial {
-                        gap: 30px;
-                    }
-                    
-                    .testimonial img {
-                        width: 200px;
-                    }
-                    
-                    .testimonial-text p {
-                        font-size: 0.95rem;
-                    }
+                
+                #storiesCarousel .carousel-control-prev,
+                #storiesCarousel .carousel-control-next {
+                    width: 40px;
+                    height: 40px;
+                    background-color: #B04B34;
+                    border-radius: 50%;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    opacity: 0.8;
                 }
-
+                
+                #storiesCarousel .carousel-control-prev {
+                    left: 10px;
+                }
+                
+                #storiesCarousel .carousel-control-next {
+                    right: 10px;
+                }
+                
+                #storiesCarousel .carousel-control-prev:hover,
+                #storiesCarousel .carousel-control-next:hover {
+                    opacity: 1;
+                }
+                
+                /* Responsive Adjustments */
                 @media (max-width: 768px) {
-                    .voicestest {
-                        padding: 40px 0 80px 0;
+                    .story-image {
+                        height: 200px;
                     }
-
-                    .testimonial {
-                        flex-direction: column;
-                        text-align: center;
-                        gap: 20px;
+                    
+                    .story-content {
+                        padding: 20px;
                     }
-
-                    .testimonial img {
-                        width: 180px;
-                        height: 180px;
-                        margin: 0 auto;
-                        object-fit: contain;
+                    
+                    .story-title {
+                        font-size: 1.3rem;
                     }
-
-                    .testimonial-text {
-                        padding: 0 10px;
-                        width: 100%;
-                    }
-
-                    .testimonial-text p {
+                    
+                    .story-text {
                         font-size: 0.95rem;
-                        line-height: 1.6;
-                        text-align: left;
+                        line-height: 1.5;
                     }
-
-                    .testimonial-name,
-                    .testimonial-title {
-                        text-align: center;
-                        margin-bottom: 10px;
+                    
+                    .stat-value {
+                        font-size: 1rem;
                     }
-
-                    .quote-icon {
-                        font-size: 35px;
-                        margin-bottom: 50px;
+                    
+                    .stat-label {
+                        font-size: 0.8rem;
                     }
-
-                    .testimonial-text .open-quote {
-                        display: inline-block;
-                        text-align: justify;
-                        float: left;
-                        margin-right: 10px;
-                    }
-
-                    .open-quote,
-                    .close-quote {
-                        font-size: 25px;
-                        display: inline-block;
-                    }
-
-                    .testimonial-text .quote-icon:first-child {
-                        text-align: left !important;
+                    
+                    .section-header h1 {
+                        font-size: 2rem;
                     }
                 }
-
+                
                 @media (max-width: 576px) {
-                    .voicestest {
-                        padding: 30px 0 70px 0;
+                    .story-image {
+                        height: 180px;
                     }
-
-                    .testimonial img {
-                        width: 150px;
-                        height: 150px;
+                    
+                    .story-title {
+                        font-size: 1.2rem;
                     }
-
-                    .testimonial-text p {
+                    
+                    .story-text {
                         font-size: 0.9rem;
                     }
-
-                    .testimonial-name {
-                        font-size: 1.1rem;
-                    }
-
-                    .testimonial-title {
-                        font-size: 0.85rem;
+                    
+                    #storiesCarousel .carousel-control-prev,
+                    #storiesCarousel .carousel-control-next {
+                        width: 35px;
+                        height: 35px;
                     }
                     
-                    h2.fw-bold.display-6 {
-                        font-size: 1.8rem;
+                    #storiesCarousel .carousel-control-prev-icon,
+                    #storiesCarousel .carousel-control-next-icon {
+                        width: 15px;
+                        height: 15px;
                     }
                 }
-
+                
                 @media (max-width: 400px) {
-                    .testimonial-text {
-                        padding: 0 5px;
+                    .story-image {
+                        height: 160px;
                     }
-
-                    .testimonial-text p {
+                    
+                    .story-content {
+                        padding: 15px;
+                    }
+                    
+                    .story-title {
+                        font-size: 1.1rem;
+                    }
+                    
+                    .story-text {
                         font-size: 0.85rem;
                     }
                     
-                    .testimonial img {
-                        width: 130px;
-                        height: 130px;
+                    .story-stats {
+                        padding-top: 10px;
+                    }
+                    
+                    .stat-value {
+                        font-size: 0.9rem;
+                    }
+                    
+                    .stat-label {
+                        font-size: 0.75rem;
                     }
                 }
             </style>
+            
+            <script>
+                // Initialize carousel for mobile
+                document.addEventListener('DOMContentLoaded', function() {
+                    const storiesCarousel = document.getElementById('storiesCarousel');
+                    if (storiesCarousel) {
+                        // Bootstrap carousel is already initialized via data-bs-ride attribute
+                        // Add smooth scrolling for carousel items
+                        const carousel = new bootstrap.Carousel(storiesCarousel, {
+                            interval: 5000,
+                            wrap: true
+                        });
+                    }
+                });
+            </script>
         </section>
 
         <!-- Rewards Section -->
@@ -2047,10 +2632,7 @@
                         <div class="icon"><i class="fas fa-star"></i></div>
                         <p>Personal Fulfillment</p>
                     </div>
-                    <div class="rewards-item">
-                        <div class="icon"><i class="fas fa-handshake"></i></div>
-                        <p>Networking & Connection</p>
-                    </div>
+                   
                     <div class="rewards-item">
                         <div class="icon"><i class="fas fa-award"></i></div>
                         <p>Legacy & Recognition</p>
@@ -2080,7 +2662,7 @@
 
                 .rewards-unique-section .rewards-list {
                     display: grid;
-                    grid-template-columns: repeat(5, 1fr);
+                    grid-template-columns: repeat(4, 1fr);
                     justify-items: center;
                     gap: 40px;
                     margin: 0 auto;
@@ -2224,162 +2806,259 @@
             </style>
         </section>
 
-        <!-- Stories Section -->
-        <section id="testimonials" class="testimonials section">
-            <div id="stories" class="container" data-aos="fade-up">
-                <h2 class="fw-bold display-6 mb-4 text-center">Stories of Change</h2>
-            </div>
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
-                <div class="swiper init-swiper">
-                    <script type="application/json" class="swiper-config">
-                        {
-                            "loop": true,
-                            "speed": 600,
-                            "autoplay": { "delay": 5000 },
-                            "slidesPerView": "auto",
-                            "pagination": {
-                                "el": ".swiper-pagination",
-                                "type": "bullets",
-                                "clickable": true
-                            },
-                            "breakpoints": {
-                                "320": { "slidesPerView": 1, "spaceBetween": 40 },
-                                "1200": { "slidesPerView": 3, "spaceBetween": 1 }
-                            }
-                        }
-                    </script>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <p class="text-white">Aniket comes from a humble family where money was always short.
-                                    Almost half of his family's annual income would have gone into hostel and mess
-                                    charges at IIT Kanpur, making it difficult for him to continue. Despite this, he
-                                    worked hard and kept his dream alive. Your support helped him cover these essential
-                                    costs, allowing him to focus on academics and his passion for space and defense
-                                    research. He now hopes to serve the nation through ISRO or DRDO and one day support
-                                    other students like him.</p>
-                                <div class="profile mt-auto">
-                                    <img src="testimonials/Aniket Shinde (1).jpg" class="testimonial-img" alt="">
-                                    <h3 class="text-white">Aniket Shinde</h3>
-                                </div>
-                            </div>
+       <!-- Testimonials Section -->
+       <section id="voices" class="voicestest">
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <h2 class="fw-bold display-6 mb-4 text-center">Voices of Generosity</h2>
+            <div class="carousel-inner container">
+                <div class="carousel-item active">
+                    <div class="testimonial">
+                        <img src="testimonials/Abhay_Bhushan.png" alt="Abhay Bhushan">
+                        <div class="testimonial-text">
+                            <div class="testimonial-name">Mr. Abhay K. Bhushan</div>
+                            <div class="testimonial-title">B.Tech/EE/1965<br />Chairman, Asquare, Inc.</div>
+                            <div class="quote-icon"><i class="bi bi-quote open-quote"></i></div>
+                            <p>Being from the first batch of IIT Kanpur, filled me with hope and a can-do spirit
+                                which helped me in developing the Internet and I am grateful to IIT Kanpur for this
+                                and I want to continue giving back, both individually and collectively. I encourage
+                                all alumni to give back. TOGETHER WE CAN!</p>
+                            <div class="quote-icon text-end"> <i class="bi bi-quote close-quote"></i></div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <p class="text-white">Sneh comes from a small village where her father drives an
-                                    auto-rickshaw and her mother manages the home. As an EWS student, financial
-                                    struggles constantly stood in the way of her education, making the dream of IIT
-                                    Kanpur seem far away. Paying for basic needs like hostel and electricity was a
-                                    constant worry. Your support not only lifted this weight but also gave her the
-                                    confidence to dream bigger. Inspired by this kindness, Sneh hopes to one day pay it
-                                    forward and support students from villages like hers.</p>
-                                <div class="profile mt-auto">
-                                    <img src="testimonials/Sneh Omer.jpeg" class="testimonial-img" alt="">
-                                    <h3 class="text-white">Sneh Omer</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <p class="text-white">Anshika comes from a small village, in a family dependent on
-                                    farming as the only source of income. Covering essential expenses like mess and
-                                    electricity bills at IIT Kanpur was a heavy burden, and at one point her ability to
-                                    continue studies and prepare for placements was at risk. Alumni support lifted that
-                                    pressure, giving her the space to focus on academics and her future. Today, she
-                                    dreams of succeeding in her career and helping other young women from villages like
-                                    hers.</p>
-                                <div class="profile mt-auto">
-                                    <img src="testimonials/Anshika Singh1.jpeg" class="testimonial-img" alt="">
-                                    <h3 class="text-white">Anshika Singh</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-
-                                <p class="text-white">
-                                    Vidhi grew up in a small city in Rajasthan, in a joint family where
-                                    finances were always tight. During her JEE preparation, both her
-                                    parents were hospitalized, leaving her with the fear of not being
-                                    able to continue her studies. Even after joining IIT Kanpur, essential
-                                    expenses added pressure to her family. Your support lifted that
-                                    burden, giving Vidhi the chance to excel, earning awards, securing
-                                    internships, and even a pre-placement offer. She now aspires to
-                                    pursue higher studies and inspire others from small towns like
-                                    hers.
-                                </p>
-                                <div class="profile mt-auto">
-                                    <img src="testimonials/Vidhi Jain.jpg" class="testimonial-img" alt="">
-                                    <h3 class="text-white">Vidhi Jain</h3>
-                                </div>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-
-                                <p class="text-white">
-                                    Amit is the son of a farmer from a small village where the family
-                                    depended on agriculture as the only source of income. The seasonal
-                                    nature of farming meant his parents constantly worried about
-                                    managing household needs, let alone the costs of IIT Kanpur.
-                                    Covering hostel and living expenses often felt impossible. Alumni
-                                    support eased this struggle, allowing Amit to continue his studies
-                                    with peace of mind. He now dreams of building a successful career
-                                    and supporting students from farming families like his.
-                                </p>
-                                <div class="profile mt-auto">
-                                    <img src="testimonials/Amit Kumar.jpeg.jpg" class="testimonial-img" alt="">
-                                    <h3 class="text-white">Amit Kumar</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End testimonial item -->
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-
-                                <p class="text-white">
-                                    Harsh's father, the primary breadwinner, worked long hours on the
-                                    farm, while his mother stitched clothes to add to the family income.
-                                    Despite these struggles, Harsh not only managed his academics at
-                                    IIT Kanpur but also pursued his love for sports like football and
-                                    badminton, which taught him teamwork and resilience. Your
-                                    support allowed him to continue his education without the
-                                    crushing financial burden, and he now dreams of excelling in both
-                                    his career and life, while giving back to students like him.
-                                </p>
-                                <div class="profile mt-auto">
-                                    <img src="testimonials/Harsh Wardhan Singh.jpg" class="testimonial-img" alt="">
-                                    <h3 class="text-white">Harsh Wardhan Singh Shekhawat</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-
-                                <p class="text-white">
-                                    Amipriya faced hardships early in life when he lost a parent, leaving his
-                                    father, an auto-rickshaw driver, as the only earner in the family. With
-                                    such limited income, higher education seemed almost impossible.
-                                    Reaching IIT Kanpur was his biggest dream, but covering mess and
-                                    living expenses became a huge challenge. Alumni support gave him
-                                    the relief he needed to continue his studies without burdening his
-                                    family. Today, he is motivated to succeed and hopes to give back by
-                                    helping other students facing similar struggles.
-                                </p>
-                                <div class="profile mt-auto">
-                                    <img src="testimonials/amipriya Anand.jpg" class="testimonial-img" alt="">
-                                    <h3 class="text-white">Amipriya Anand</h3>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-                   
-                    <div class="swiper-pagination"></div>
+                </div>
+               
+                <div class="carousel-item">
+                    <div class="testimonial">
+                        <img src="testimonials/Dhanraj K Chokappa.jpg" alt="Mr. Gokul Rajaram">
+                        <div class="testimonial-text">
+                            <div class="testimonial-name">Mr. Dhanraj K. Chokappa</div>
+                            <div class="testimonial-title">(BT/CHE/1982),<br /> Independent Consultant. Retired from Unilever R&amp;D Bangalore</div>
+                            <div class="quote-icon"><i class="bi bi-quote open-quote"></i></div>
+                            <p>My five years as a BTech student from 1977 to 1982 provided a strong foundation for
+                                my subsequent achievements. One enduring memory is of my roommate during the
+                                first three years, who, despite coming from a humble rural background, cleared the
+                                JEE through his own efforts. Fortunately, tuition and hostel fees were very nominal at
+                                that time. With a merit cum means scholarship, he graduated with good grades and
+                                is now well-settled abroad. Today, tuition fees and other expenses are beyond the
+                                reach of many deserving students. Helping such students is my primary motivation to
+                                give back to IITK.</p>
+                            <div class="quote-icon text-end"> <i class="bi bi-quote close-quote"></i></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden=" true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            <div class="carousel-indicators mt-4">
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+            </div>
+        </div>
+        <style>
+            .voicestest {
+                background-color: #fff;
+                padding: 60px 0;
+            }
+
+            .testimonial {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 40px;
+            }
+
+            .testimonial-text {
+                flex: 1;
+            }
+
+            .testimonial-text p {
+                font-size: 1rem;
+                color: #0f0f0f;
+                line-height: 1.7;
+            }
+
+            .quote-icon {
+                font-size: 40px;
+                color: #b04b344f;
+                line-height: 1;
+                display: block;
+            }
+
+            .open-quote {
+                font-size: 30px;
+                color: #b04b34cd;
+                display: inline-block;
+                line-height: 0.5;
+                margin-bottom: 10px;
+            }
+
+            .close-quote {
+                font-size: 30px;
+                color: #b04b34b9;
+                transform: rotate(180deg) translateY(5px);
+                display: inline-block;
+                line-height: 0.5;
+                margin-top: 10px;
+            }
+
+            .testimonial-name {
+                font-weight: 700;
+                font-size: 1.2rem;
+                margin-top: 20px;
+                border-bottom: 2px solid #B04B34;
+                display: inline-block;
+                padding-bottom: 2px;
+            }
+
+            .testimonial-title {
+                font-size: 0.95rem;
+                color: #555;
+                margin-top: 5px;
+            }
+
+            .testimonial img {
+                width: 250px;
+                height: auto;
+                border-radius: 10px;
+                object-fit: contain;
+            }
+
+            .carousel-indicators [data-bs-target] {
+                background-color: #B04B34;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                margin: 0 5px;
+            }
+
+            .carousel-indicators {
+                bottom: -50px;
+            }
+
+            @media (max-width: 992px) {
+                .testimonial {
+                    gap: 30px;
+                }
+                
+                .testimonial img {
+                    width: 200px;
+                }
+                
+                .testimonial-text p {
+                    font-size: 0.95rem;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .voicestest {
+                    padding: 40px 0 80px 0;
+                }
+
+                .testimonial {
+                    flex-direction: column;
+                    text-align: center;
+                    gap: 20px;
+                }
+
+                .testimonial img {
+                    width: 180px;
+                    height: 180px;
+                    margin: 0 auto;
+                    object-fit: contain;
+                }
+
+                .testimonial-text {
+                    padding: 0 10px;
+                    width: 100%;
+                }
+
+                .testimonial-text p {
+                    font-size: 0.95rem;
+                    line-height: 1.6;
+                    text-align: left;
+                }
+
+                .testimonial-name,
+                .testimonial-title {
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+
+                .quote-icon {
+                    font-size: 35px;
+                    margin-bottom: 50px;
+                }
+
+                .testimonial-text .open-quote {
+                    display: inline-block;
+                    text-align: justify;
+                    float: left;
+                    margin-right: 10px;
+                }
+
+                .open-quote,
+                .close-quote {
+                    font-size: 25px;
+                    display: inline-block;
+                }
+
+                .testimonial-text .quote-icon:first-child {
+                    text-align: left !important;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .voicestest {
+                    padding: 30px 0 70px 0;
+                }
+
+                .testimonial img {
+                    width: 150px;
+                    height: 150px;
+                }
+
+                .testimonial-text p {
+                    font-size: 0.9rem;
+                }
+
+                .testimonial-name {
+                    font-size: 1.1rem;
+                }
+
+                .testimonial-title {
+                    font-size: 0.85rem;
+                }
+                
+                h2.fw-bold.display-6 {
+                    font-size: 1.8rem;
+                }
+            }
+
+            @media (max-width: 400px) {
+                .testimonial-text {
+                    padding: 0 5px;
+                }
+
+                .testimonial-text p {
+                    font-size: 0.85rem;
+                }
+                
+                .testimonial img {
+                    width: 130px;
+                    height: 130px;
+                }
+            }
+        </style>
+    </section>
         <section style="
         padding:120px 20px;
         text-align:center;
@@ -2424,9 +3103,6 @@
             </p>
 
         </section>
-
-
-
 
     </main>
 
@@ -2483,6 +3159,8 @@
                 border-radius: 5px;
                 text-decoration: none;
                 font-weight: 500;
+                min-width: 200px;        /* 👈 Same width for both buttons */
+
                 transition: background-color 0.3s;
             }
 
@@ -2526,52 +3204,93 @@
 
     <!-- Donation Form JavaScript -->
     <script>
-        // Payment Partner Links
+        // Updated Payment Partner Links with separate monthly and one-time links
         const paymentLinks = {
-            'usa': 'https://www.zeffy.com/en-US/donation-form/bb809edf-3a48-4fec-931b-18fcbee7da40',
-            'uk': 'https://donate.justgiving.com/charity/eff-iitkanpur/donation-amount',
-            'australia': 'https://myriadau.fcsuite.com/erp/donate/create/fund?funit_id=1128',
-            'canada': 'https://www.canadahelps.org/en/charities/myriad-canada/campaign/h502-support-education-research-and-access-to-healthcare-with-the-iit-kanpur/#create-a-campaign',
-            'germany': 'https://donate.transnationalgiving.eu/germany/IITKanpur',
-            'belgium': 'https://donate.kbs-frb.be/actions/EFF-IITKanpurUniversity'
+            'usa': {
+                'monthly': 'https://www.zeffy.com/en-US/donation-form/bb809edf-3a48-4fec-931b-18fcbee7da40',
+                'one-time': 'https://iitk.ac.in/dora/givingback/donate-now-usd/Annual-Gift-Programme'
+            },
+            'uk': {
+                'monthly': 'https://www.justgiving.com/charity/eff-iitkanpur',
+                'one-time': 'https://www.justgiving.com/charity/eff-iitkanpur'
+            },
+            'australia': {
+                'monthly': 'https://myriadau.fcsuite.com/erp/donate/create/fund?funit_id=1128',
+                'one-time': 'https://myriadau.fcsuite.com/erp/donate/create/fund?funit_id=1128'
+            },
+            'belgium': {
+                'monthly': 'https://donate.kbs-frb.be/actions/EFF-IITKanpurUniversity',
+                'one-time': 'https://donate.kbs-frb.be/actions/EFF-IITKanpurUniversity'
+            },
+            'canada': {
+                'monthly': 'https://www.canadahelps.org/en/charities/myriad-canada/campaign/h502-support-education-research-and-access-to-healthcare-with-the-iit-kanpur/#create-a-campaign',
+                'one-time': 'https://www.myriadcanada.org/en/project/support-education-research-healthcare-iit-kanpur/'
+            },
+            'germany': {
+                'monthly': 'https://donate.transnationalgiving.eu/germany/IITKanpur',
+                'one-time': 'https://donate.transnationalgiving.eu/germany/IITKanpur'
+            },
+            'other': {
+                'monthly': 'https://iitk.ac.in/dora/givingback/other-country/Annual-Gift-Programme',
+                'one-time': 'https://iitk.ac.in/dora/givingback/other-country/Annual-Gift-Programme'
+            }
         };
 
         // Payment Modal Functions
-        function openPaymentModal(country, countryName) {
+        function openPaymentModal(country, countryName, countryIcon, donationType) {
             const modal = document.getElementById('paymentModal');
-            const modalTitle = document.getElementById('modalCountryTitle');
+            const modalCountryIcon = document.getElementById('modalCountryIcon');
+            const modalCountryName = document.getElementById('modalCountryName');
+            const modalDonationType = document.getElementById('modalDonationType');
             const modalContent = document.getElementById('modalContent');
             const proceedButton = document.getElementById('proceedButton');
 
             let content = '';
-            let paymentLink = paymentLinks[country] || '#';
-
+            let paymentLink = '';
+            
+            // Set the icon and name
+            modalCountryIcon.className = countryIcon;
+            modalCountryName.textContent = countryName;
+            
+            // Set donation type text if monthly
+            if (donationType === 'monthly') {
+                modalDonationType.textContent = 'Monthly ';
+                paymentLink = paymentLinks[country]?.monthly || paymentLinks['other'].monthly;
+            } else {
+                modalDonationType.textContent = '';
+                paymentLink = paymentLinks[country]?.['one-time'] || paymentLinks['other']['one-time'];
+            }
+            
             switch (country) {
                 case 'usa':
-                    modalTitle.innerHTML = '🇺🇸 United States Payment Instructions';
-                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Enter amount: $15 / $30 / $60 / $120.</li><li>Enter your details and Complete Payment</li></ol></div>`;
+                    if (donationType === 'monthly') {
+                        content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Click "Proceed to Payment" button</li><li>On Zeffy page, select monthly donation option</li><li>Enter amount and complete payment</li></ol></div>`;
+                    } else {
+                        content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Enter amount: $15 / $30 / $60 / $120.</li><li>Enter your details and Complete Payment</li></ol></div>`;
+                    }
                     break;
                 case 'uk':
-                    modalTitle.innerHTML = '🇬🇧 United Kingdom Payment Instructions';
-                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Select "Monthly" Option</li><li>Enter amount: £30 / £50 / £150 / £200.</li><li>Enter your details and Complete Payment</li></ol></div>`;
+                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>${donationType === 'monthly' ? 'Select "Monthly" Option' : 'Select Donation Type'}</li><li>Enter amount: £30 / £50 / £150 / £200.</li><li>Enter your details and Complete Payment</li></ol></div>`;
                     break;
                 case 'australia':
-                    modalTitle.innerHTML = '🇦🇺 Australia Payment Instructions';
-                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Select "Recurring Donation Amount."</li><li>Enter amount and End date.</li><li>Enter your details and Complete Payment</li></ol></div>`;
+                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>${donationType === 'monthly' ? 'Select "Recurring Donation Amount"' : 'Select Donation Type'}</li><li>Enter amount${donationType === 'monthly' ? ' and End date' : ''}.</li><li>Enter your details and Complete Payment</li></ol></div>`;
                     break;
                 case 'canada':
-                    modalTitle.innerHTML = '🇨🇦 Canada Payment Instructions';
-                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Select "Donate Monthly"</li><li>Enter amount</li><li>Enter your details and Complete Payment</li></ol></div>`;
+                    if (donationType === 'monthly') {
+                        content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Click "Proceed to Payment" button</li><li>On CanadaHelps page, create a campaign for monthly donation</li><li>Set up your recurring payment</li></ol></div>`;
+                    } else {
+                        content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Select Donation Type</li><li>Enter amount</li><li>Enter your details and Complete Payment</li></ol></div>`;
+                    }
                     break;
                 case 'germany':
-                    modalTitle.innerHTML = '🇩🇪 Germany Payment Instructions';
-                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Select "Donate every month."</li><li>Enter amount: €50 / €80 / €100 / €250.</li><li>Enter your details and Complete Payment</li></ol></div>`;
+                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>${donationType === 'monthly' ? 'Select "Donate every month"' : 'Select Donation Type'}</li><li>Enter amount: €50 / €80 / €100 / €250.</li><li>Enter your details and Complete Payment</li></ol></div>`;
                     break;
                 case 'belgium':
-                    modalTitle.innerHTML = '🇧🇪 Belgium Payment Instructions';
-                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Select "Don Mensuel/ I Donate every month."</li><li>Enter Amount</li><li>Enter your details and Complete Payment</li></ol></div>`;
+                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>${donationType === 'monthly' ? 'Select "Don Mensuel/ I Donate every month"' : 'Select Donation Type'}</li><li>Enter Amount</li><li>Enter your details and Complete Payment</li></ol></div>`;
                     break;
-                default: return;
+                default:
+                    content = `<div class="payment-steps"><h4>Steps:</h4><ol><li>Click "Proceed to Payment" button</li><li>Complete your donation on our secure payment partner's website</li></ol></div>`;
+                    break;
             }
 
             modalContent.innerHTML = content;
@@ -2596,7 +3315,8 @@
         function switchTab(step) {
             document.querySelectorAll('.form-step').forEach(stepDiv => stepDiv.classList.remove('active'));
             document.getElementById('step' + step).classList.add('active');
-            updateStep2DonationDisplay();
+
+            if (step === 2) updateStep2DonationDisplay();
         }
 
         // Function to update donation display in step 2
@@ -2610,7 +3330,7 @@
             }
         }
 
-        // Function to get selected amount
+        // Function to get selected amount (India only)
         function getSelectedAmount() {
             const selectedOption = document.querySelector('.amount-option.selected');
             if (selectedOption) return selectedOption.getAttribute('data-amount');
@@ -2630,11 +3350,18 @@
 
         // Function to get selected type
         function getSelectedType() {
-            const activeOption = document.querySelector('.donation-type-option.active');
-            return activeOption ? activeOption.getAttribute('data-type') : 'one-time';
+            // Check if India content is visible
+            if (document.getElementById('india-content').style.display !== 'none') {
+                const activeOption = document.querySelector('#india-content .donation-type-option.active');
+                return activeOption ? activeOption.getAttribute('data-type') : 'one-time';
+            } else {
+                // For other countries
+                const activeOption = document.querySelector('#other-country-content .donation-type-option.active');
+                return activeOption ? activeOption.getAttribute('data-type') : 'one-time';
+            }
         }
 
-        // Function to update donation display
+        // Function to update donation display (India only)
         function updateDonationDisplay() {
             const selectedAmount = getSelectedAmount();
             const selectedType = getSelectedType();
@@ -2649,7 +3376,7 @@
             }
         }
 
-        // Function to switch amount options based on donation type
+        // Function to switch amount options based on donation type (India only)
         function switchAmountOptions(donationType) {
             const monthlyAmounts = document.getElementById('monthly-amounts');
             const onetimeAmounts = document.getElementById('onetime-amounts');
@@ -2673,32 +3400,13 @@
             updateDonationDisplay();
         }
 
-        // Mobile Donate Button Functionality
-        function initMobileDonateButton() {
-            const mobileDonateBtn = document.getElementById('mobileDonateBtn');
-            
-            if (!mobileDonateBtn) return;
-            
-            // Scroll to donation form when button is clicked
-            mobileDonateBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Scroll to donation form section
-                const donationForm = document.getElementById('donation-form');
-                if (donationForm) {
-                    donationForm.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        }
-
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
             // Initialize progress bar animation
             const fill = document.getElementById("uniquegoal-fill");
             const percentText = document.getElementById("uniquegoal-percent");
+            const goalDisplay = document.getElementById("uniquegoal-goal");
+            const raisedDisplay = document.getElementById("uniquegoal-raised");
 
             // 1.03 Cr out of 5 Cr = 20.6%
             const percent = 20.6;
@@ -2725,17 +3433,18 @@
                 }
             }, speed);
 
-            // Initialize mobile donate button
-            initMobileDonateButton();
-
             // Country selection logic
             const countryDropdown = document.querySelector('.country-dropdown');
             const countrySelected = countryDropdown.querySelector('.dropdown-selected');
             const countryOptions = countryDropdown.querySelectorAll('.option');
-            const nextButton = document.getElementById('nextButton');
             const indiaContent = document.getElementById('india-content');
+            const otherCountryContent = document.getElementById('other-country-content');
+            const globalNote = document.getElementById('global-note');
+            const nextButton = document.getElementById('nextButton');
 
-            let selectedCountry = '';
+            let selectedCountry = 'india'; // Default is India
+            let selectedCountryIcon = 'flag-icon flag-icon-in';
+            let selectedCountryName = 'India';
 
             countrySelected.addEventListener('click', function () {
                 countryDropdown.classList.toggle('active');
@@ -2744,37 +3453,59 @@
             countryOptions.forEach(option => {
                 option.addEventListener('click', function () {
                     const value = this.getAttribute('data-value');
-                    const text = this.textContent;
+                    const countryCode = this.getAttribute('data-country-code');
+                    const icon = countryCode === 'globe' ? 'fas fa-globe-americas' : 'flag-icon flag-icon-' + countryCode;
+                    const name = this.textContent.trim();
 
-                    countrySelected.textContent = text;
+                    // Update selected country display
+                    countrySelected.innerHTML = `<span class="${icon}"></span> ${name}`;
                     countrySelected.setAttribute('data-value', value);
+                    countrySelected.setAttribute('data-icon', icon);
+                    countrySelected.setAttribute('data-name', name);
                     countryDropdown.classList.remove('active');
                     
-                    // Store selected country
+                    // Store selected country info
                     selectedCountry = value;
+                    selectedCountryIcon = icon;
+                    selectedCountryName = name;
                     
-                    // Update next button text based on country
+                    // Show/hide content based on country selection
                     if (value === 'india') {
-                        nextButton.textContent = 'Next →';
                         indiaContent.style.display = 'block';
+                        otherCountryContent.style.display = 'none';
+                        globalNote.style.display = 'block';
+                        nextButton.textContent = 'Next →';
                     } else {
+                        indiaContent.style.display = 'none';
+                        otherCountryContent.style.display = 'block';
+                        globalNote.style.display = 'none';
                         nextButton.textContent = 'Proceed to Payment';
-                        indiaContent.style.display = 'block'; // Still show but will be handled by JS
                     }
                 });
             });
 
-            // Donation type toggle
-            const donationTypeOptions = document.querySelectorAll('.donation-type-option');
-            donationTypeOptions.forEach(option => {
+            // Donation type toggle for India
+            const donationTypeOptionsIndia = document.querySelectorAll('#india-content .donation-type-option');
+            donationTypeOptionsIndia.forEach(option => {
                 option.addEventListener('click', function () {
-                    donationTypeOptions.forEach(opt => opt.classList.remove('active'));
+                    const container = this.closest('.donation-type-toggle');
+                    container.querySelectorAll('.donation-type-option').forEach(opt => opt.classList.remove('active'));
                     this.classList.add('active');
                     switchAmountOptions(this.getAttribute('data-type'));
                 });
             });
 
-            // Initialize amount selection for both types
+            // Donation type toggle for other countries
+            const donationTypeOptionsOther = document.querySelectorAll('#other-country-content .donation-type-option');
+            donationTypeOptionsOther.forEach(option => {
+                option.addEventListener('click', function () {
+                    const container = this.closest('.donation-type-toggle');
+                    container.querySelectorAll('.donation-type-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Initialize amount selection for both types (India only)
             function initializeAmountSelection(amountContainerId, otherBoxId, customInputId) {
                 const amountContainer = document.getElementById(amountContainerId);
                 if (!amountContainer) return;
@@ -2811,11 +3542,11 @@
                 });
             }
 
-            // Initialize both sets of amount options
+            // Initialize both sets of amount options (India only)
             initializeAmountSelection('monthly-amounts', 'monthly-other-option-box', 'monthly-customAmountInput');
             initializeAmountSelection('onetime-amounts', 'onetime-other-option-box', 'onetime-customAmountInput');
 
-            // Next button functionality - UPDATED LOGIC
+            // Next button functionality - CORRECT LOGIC
             nextButton.addEventListener('click', function (e) {
                 e.preventDefault();
 
@@ -2836,19 +3567,19 @@
                     updateStep2DonationDisplay();
                     switchTab(2);
                 } else {
-                    // For other countries: show modal for monthly, direct redirect for one-time
-                    const donationType = getSelectedType();
-                    
-                    if (donationType === 'monthly') {
-                        // Show payment modal for monthly donations
-                        openPaymentModal(selectedCountry, countrySelected.textContent);
+                    // For other countries: check the selected donation type
+                    const selectedType = getSelectedType();
+
+                    if (selectedType === 'monthly') {
+                        // Open modal for monthly donation
+                        openPaymentModal(selectedCountry, selectedCountryName, selectedCountryIcon, 'monthly');
                     } else {
-                        // Direct redirect for one-time donations
-                        if (paymentLinks[selectedCountry]) {
-                            window.open(paymentLinks[selectedCountry], '_blank');
-                        } else {
-                            alert('Payment link not available for this country.');
+                        // For one-time donation, directly open the payment link
+                        let paymentLink = paymentLinks[selectedCountry]?.['one-time'];
+                        if (!paymentLink) {
+                            paymentLink = paymentLinks['other']['one-time'];
                         }
+                        window.open(paymentLink, '_blank');
                     }
                 }
             });
@@ -2857,6 +3588,12 @@
             document.getElementById('donationForm').addEventListener('submit', function (e) {
                 e.preventDefault();
                 
+                // Only allow form submission for India
+                if (selectedCountry !== 'india') {
+                    alert('Please use the payment options for your country from the previous step.');
+                    return;
+                }
+
                 // Collect form data
                 const formData = new FormData(this);
 
@@ -2964,6 +3701,14 @@
                     });
                 }
             });
+
+            // Mobile donate button functionality
+            const mobileDonateBtn = document.getElementById('mobileDonateBtn');
+            if (mobileDonateBtn) {
+                mobileDonateBtn.addEventListener('click', function() {
+                    document.getElementById('donation-form').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
         });
     </script>
 </body>
