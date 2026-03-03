@@ -1,3 +1,55 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  //echo "<pre>"; print_r($_POST); echo "</pre>";
+  $name = htmlentities($_POST['name'], ENT_QUOTES, 'UTF-8');
+  $email = htmlentities($_POST['email'], ENT_QUOTES, 'UTF-8');
+  $currency = htmlentities($_POST['currency'], ENT_QUOTES, 'UTF-8');
+  $phone = htmlentities($_POST['phone'], ENT_QUOTES, 'UTF-8');
+  $pannumber = htmlentities(strtoupper($_POST['pannumber']), ENT_QUOTES, 'UTF-8');
+  $pattern = "/[a-zA-z]{5}\d{4}[a-zA-Z]{1}/";
+  $valueMatch =  preg_match($pattern, $pannumber);
+  if ((strlen($pannumber)==10 and $valueMatch == 1) or strlen($pannumber)==0) {
+    $anonymous = htmlentities($_POST['anonymous'], ENT_QUOTES, 'UTF-8');
+    $select_category = htmlentities($_POST['select_category'], ENT_QUOTES, 'UTF-8');
+    $program = htmlentities($_POST['program'], ENT_QUOTES, 'UTF-8');
+    $department = htmlentities($_POST['department'], ENT_QUOTES, 'UTF-8');
+    $YOG = htmlentities($_POST['Year_of_Graduation'], ENT_QUOTES, 'UTF-8');
+    $roll_no = htmlentities($_POST['roll_no'], ENT_QUOTES, 'UTF-8');
+    $display_method = htmlentities($_POST['display_method'], ENT_QUOTES, 'UTF-8');
+    $address = '';
+    $city = '';
+    $state = '';
+    $name_display = '';
+    $country = htmlentities($_POST['country'], ENT_QUOTES, 'UTF-8');
+    $pincode = '';
+    $Amount = htmlentities($_POST['amount'], ENT_QUOTES, 'UTF-8');
+    if ($Amount=='other'){
+      $Amount = htmlentities($_POST['otherAmount'], ENT_QUOTES, 'UTF-8');
+    }
+    $purpose = htmlentities($_POST['purpose'], ENT_QUOTES, 'UTF-8');
+    $donationtime = htmlentities($_POST['donationtime'], ENT_QUOTES, 'UTF-8');
+    if($Amount <= 500000 ){
+      if ($donationtime == 'one-time' ){
+        include('pay.php');
+      }
+      else{
+        
+        $recurringFrequency = htmlentities($_POST['recurring-frequency'], ENT_QUOTES, 'UTF-8');
+        $time_end = htmlentities($_POST['time_end'], ENT_QUOTES, 'UTF-8');
+        $class_from = '';
+        include('recurring-pay.php');
+      }
+    }
+    else{
+      echo "<script>alert('Amount should not be grater than 5 Lakhs');</script>";
+    }
+  }
+}
+include('donate_common.php');
+$Purpose = "Annual Gift Programme";
+include('data.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1290,7 +1342,7 @@
                             <p>Please provide your details</p>
                         </div>
 
-                        <form id="donationForm">
+                        <form id="donationForm" method="post" action="">
                             <!-- Donation Summary at Top -->
                             <div class="selected-donation-display show" style="margin-bottom: 20px;">
                                 <div class="donation-summary">
@@ -1307,15 +1359,15 @@
                                 <div class="section-title">Personal Information</div>
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <input type="text" name="name" placeholder="Full Name *" required>
+                                        <input type="text" name="name" id="name" placeholder="Full Name *" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" placeholder="Email *" required>
+                                        <input type="email" name="email" id="email" placeholder="Email *" required>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <input type="tel" name="phone" pattern="[0-9]{10}"
+                                        <input type="tel" name="phone" id="phone" pattern="[0-9]{10}"
                                             placeholder="Mobile Number *" required>
                                     </div>
                                     <div class="form-group pan-input-container">
@@ -1361,9 +1413,24 @@
                                     </div>
                                     <div class="form-row mt-3">
                                         <div class="form-group">
-                                            <input type="text" name="roll_no" placeholder="Roll Number">
+                                            <input type="text" name="roll_no" id="roll_no" placeholder="Roll Number">
                                         </div>
                                     </div>
+                                    <input type="hidden" name="currency" id="currency" value="inr">
+<input type="hidden" name="country" id="countryInput" value="India">
+
+<input type="hidden" name="select_category" id="select_category">
+<input type="hidden" name="program" id="program">
+<input type="hidden" name="department" id="department">
+<input type="hidden" name="Year_of_Graduation" id="Year_of_Graduation">
+
+<input type="hidden" name="amount" id="amount" value="500">
+
+<input type="hidden" name="display_method" id="display_method" value="web">
+<input type="hidden" name="purpose" id="purpose" value="Annual Gift Program">
+<input type="hidden" name="donationtime" id="donationtime" value="">
+<input type="hidden" name="recurring-frequency" id="recurring_frequency" value="monthly">
+<input type="hidden" name="time_end" id="time_end" value="10">
                                 </div>
                             </div>
 
@@ -1388,7 +1455,7 @@
                             <div class="form-actions">
                                 <button type="button" class="btn btn-prev" onclick="switchTab(1)">←
                                     Previous</button>
-                                <button type="submit" class="btn btn-submit">Pay Now</button>
+                                <button type="submit" class="btn btn-submit" onclick="return validateForm()">Pay Now</button>
                             </div>
                         </form>
                     </div>
@@ -1584,464 +1651,316 @@
 
     <main class="main">
         <!-- About Section -->
-       <!-- =============================================== -->
-<!--  ABOUT SEASON SECTION (with CTA & modal)        -->
-<!-- =============================================== -->
-<!-- =============================================== -->
-<!--  ABOUT SEASON SECTION (with CTA link to new page) -->
-<!-- =============================================== -->
-<section id="about-season" class="about-season section" style="padding: 50px 0;">
-    <div class="container">
-      <div class="row align-items-center gy-4">
-        
-        <!-- Left column: text content -->
-        <div class="col-lg-6">
-          <div class="about-season-content">
-            <h4 class="mb-4 fw-bold" style="color:#b04b34;">
-              One community. One purpose. Year-round impact.
-            </h4>
-            <p class="fs-5">
-              Annual Giving is how the IIT Kanpur community comes together. Alumni, faculty, friends, and well-wishers to strengthen the Institute we all believe in. Every contribution supports students, empowers faculty, and advances the ideas and innovations that define IIT Kanpur.
-            </p>
-            <p class="fs-5">
-              Last year marked a bold step towards strengthening IIT Kanpur's global impact. This progress is made possible by the commitment and support of the IITK community.
-            </p>
-            <p class="fs-5">
-              When you give annually, you don't just support a cause you sustain momentum. With each gift, you become an active partner in shaping the Institute's future and carrying its legacy forward.
-            </p>
-          </div>
-        </div>
-  
-        <!-- Right column: goal card + CTA link -->
-        <div class="col-lg-6 position-relative">
-          <div class="about-season-image-wrapper position-relative text-center">
-            <div class="uniquegoal-section mt-5 p-5 shadow-lg rounded-4">
-  
-              <h5 class="fw-bold mb-2 uniquegoal-heading">
-                From Vision to Impact:<br> Together, We Make It Happen
-              </h5>
-              <p class="timeline-text mb-4">(<strong>by March 2026</strong>)</p>
-  
-              <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
-                <div class="text-start">
-                  <p class="fw-semibold mb-0 text-muted small">Raised So Far</p>
-                  <h6 class="fw-bold">
-                    ₹ <span id="uniquegoal-raised">1.03 Cr</span>
-                  </h6>
-                </div>
-                <div class="text-end">
-                  <p class="fw-semibold mb-0 text-muted small">Goal</p>
-                  <h6 class="fw-bold">
-                    ₹ <span id="uniquegoal-goal">5 Cr</span>
-                  </h6>
-                </div>
-              </div>
-  
-              <!-- Progress bar (20.6%) -->
-              <div class="uniquegoal-progress-container mb-3">
-                <div class="uniquegoal-progress-fill" id="uniquegoal-fill" style="width: 20.6%;">
-                  <span class="uniquegoal-progress-text" id="uniquegoal-percent">20.6%</span>
-                </div>
-              </div>
-  
-              <div class="contributors-count text-center my-3">
-                <p class="contributors-text mb-0">
-                  <span class="contributor-number">122</span> Contributors
-                </p>
-              </div>
-  
-              <div class="donation-message mt-3 mb-2">
-                <p class="donation-line">
-                  <span class="highlight-text">Your gift</span> moves the bar towards our
-                  <span class="highlight-text">vision.</span>
-                </p>
-                <p class="donation-subline">
-                  Each donation will support the urgent needs of students and faculty,
-                  and strengthen IIT Kanpur's legacy.
-                </p>
-              </div>
-  
-              <!-- ===== CTA LINK (opens new page) ===== -->
-              <a href="contribute.html" class="cta-donate-btn">
-                💡 See Ways to Contribute
-              </a>
-              <!-- ===== END CTA LINK ===== -->
-  
-              <p class="note-text mt-3 mb-0">
-                <strong>Note (Outside India):</strong> Online donations reflect within 5–7 working days;
-                cheque donations may take up to 30 days.
-              </p>
-  
-            </div> <!-- end uniquegoal-section -->
-          </div> <!-- end about-season-image-wrapper -->
-        </div> <!-- end col-lg-6 -->
-  
-      </div> <!-- end row -->
-    </div> <!-- end container -->
-  </section>
-  
-  <!-- =============================================== -->
-  /*  STYLES FOR THIS SECTION (CTA + uniquegoal styles) */
-  /* ================================================= */
-  <style>
-    /* CTA link – using #B04b34 as main color */
-    .cta-donate-btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #B04b34, #c05b44);
-      color: white;
-      font-weight: 700;
-      font-size: 1.25rem;
-      padding: 0.75rem 2rem;
-      border: none;
-      border-radius: 50px;
-      box-shadow: 0 10px 20px rgba(176, 75, 52, 0.3);
-      transition: all 0.3s ease;
-      text-decoration: none;
-      cursor: pointer;
-      margin: 20px 0 10px 0;
-    }
-  
-    .cta-donate-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(176, 75, 52, 0.4);
-      background: linear-gradient(135deg, #8e3c2a, #b04b34);
-      color: white;
-    }
-  
-    /* Uniquegoal section styles (keep all existing) */
-    .uniquegoal-section {
-      background: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      font-family: 'Raleway', sans-serif;
-      transition: all 0.4s ease;
-      text-align: center;
-    }
-  
-    .uniquegoal-section:hover {
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
-      transform: translateY(-4px);
-    }
-  
-    .uniquegoal-heading {
-      color: #B04B3B;
-      font-size: 1.4rem;
-      letter-spacing: 0.6px;
-      line-height: 1.4;
-    }
-  
-    .timeline-text {
-      font-size: 0.9rem;
-      color: #B04B34;
-      font-style: italic;
-    }
-  
-    .uniquegoal-progress-container {
-      width: 100%;
-      height: 26px;
-      border-radius: 50px;
-      background-color: #f6f6f6;
-      position: relative;
-      overflow: hidden;
-    }
-  
-    .uniquegoal-progress-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: 50px;
-      background: linear-gradient(90deg, #7A291F, #9C3F32, #B04B3B);
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-      transition: width 0.8s ease-in-out;
-    }
-  
-    .uniquegoal-progress-text {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #333;
-      pointer-events: none;
-      z-index: 10;
-      text-shadow: 0 0 3px rgba(255, 255, 255, 0.9), 0 0 5px rgba(255, 255, 255, 0.7), 0 0 7px rgba(255, 255, 255, 0.5);
-      min-width: 40px;
-      text-align: center;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(2px);
-    }
-  
-    .uniquegoal-progress-container .uniquegoal-progress-text.high-progress {
-      color: #fff;
-      text-shadow: 0 0 3px rgba(0, 0, 0, 0.9), 0 0 5px rgba(0, 0, 0, 0.7), 0 0 7px rgba(0, 0, 0, 0.5);
-      background: rgba(0, 0, 0, 0.2);
-    }
-  
-    .inr-text {
-      font-size: 0.9rem;
-      color: #B04B3B;
-      font-weight: 600;
-    }
-  
-    .note-text {
-      background: rgba(176, 75, 59, 0.08);
-      border-left: 4px solid #B04B3B;
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      color: #444;
-      font-style: italic;
-      text-align: left;
-    }
-  
-    .note-text strong {
-      color: #B04B3B;
-      font-style: normal;
-    }
-  
-    .donation-message {
-      font-family: 'Raleway', sans-serif;
-      color: #444;
-      text-align: center;
-      line-height: 1.6;
-    }
-  
-    .donation-line {
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      margin-bottom: 6px;
-    }
-  
-    .highlight-text {
-      color: #B04B3B;
-      font-weight: 700;
-    }
-  
-    .contributors-count {
-      display: inline-block;
-      background: rgba(176, 75, 59, 0.08);
-      border-radius: 30px;
-      padding: 6px 22px;
-      margin: 12px auto;
-      border: 1px solid rgba(176, 75, 59, 0.15);
-      box-shadow: 0 2px 6px rgba(176, 75, 59, 0.08);
-      transition: all 0.3s ease-in-out;
-    }
-  
-    .contributors-count:hover {
-      background: rgba(176, 75, 59, 0.12);
-      transform: translateY(-2px);
-    }
-  
-    .contributors-text {
-      font-size: 1rem;
-      letter-spacing: 0.3px;
-      color: #333;
-      font-weight: 500;
-    }
-  
-    .contributor-number {
-      color: #B04B3B;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-  
-    @media (max-width: 768px) {
-      .uniquegoal-heading {
-        font-size: 1.15rem;
-      }
-      .uniquegoal-progress-container {
-        height: 22px;
-      }
-      .uniquegoal-progress-text {
-        font-size: 0.85rem;
-      }
-    }
-  
-    @media (max-width: 576px) {
-      .uniquegoal-progress-container {
-        height: 20px;
-      }
-      .uniquegoal-progress-text {
-        font-size: 0.8rem;
-      }
-      .donation-line {
-        font-size: 0.95rem;
-      }
-    }
-  </style>
-  
-  <!-- =============================================== -->
-  <!--  EXISTING STYLES FOR UNIQUEGOAL SECTION (keep)  -->
-  /* ================================================= */
-  <style>
-    .uniquegoal-section {
-      background: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      font-family: 'Raleway', sans-serif;
-      transition: all 0.4s ease;
-      text-align: center;
-    }
-  
-    .uniquegoal-section:hover {
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
-      transform: translateY(-4px);
-    }
-  
-    .uniquegoal-heading {
-      color: #B04B3B;
-      font-size: 1.4rem;
-      letter-spacing: 0.6px;
-      line-height: 1.4;
-    }
-  
-    .timeline-text {
-      font-size: 0.9rem;
-      color: #B04B34;
-      font-style: italic;
-    }
-  
-    .uniquegoal-progress-container {
-      width: 100%;
-      height: 26px;
-      border-radius: 50px;
-      background-color: #f6f6f6;
-      position: relative;
-      overflow: hidden;
-    }
-  
-    .uniquegoal-progress-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: 50px;
-      background: linear-gradient(90deg, #7A291F, #9C3F32, #B04B3B);
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-      transition: width 0.8s ease-in-out;
-    }
-  
-    .uniquegoal-progress-text {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #333;
-      pointer-events: none;
-      z-index: 10;
-      text-shadow: 0 0 3px rgba(255, 255, 255, 0.9), 0 0 5px rgba(255, 255, 255, 0.7), 0 0 7px rgba(255, 255, 255, 0.5);
-      min-width: 40px;
-      text-align: center;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(2px);
-    }
-  
-    .uniquegoal-progress-container .uniquegoal-progress-text.high-progress {
-      color: #fff;
-      text-shadow: 0 0 3px rgba(0, 0, 0, 0.9), 0 0 5px rgba(0, 0, 0, 0.7), 0 0 7px rgba(0, 0, 0, 0.5);
-      background: rgba(0, 0, 0, 0.2);
-    }
-  
-    .inr-text {
-      font-size: 0.9rem;
-      color: #B04B3B;
-      font-weight: 600;
-    }
-  
-    .note-text {
-      background: rgba(176, 75, 59, 0.08);
-      border-left: 4px solid #B04B3B;
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      color: #444;
-      font-style: italic;
-      text-align: left;
-    }
-  
-    .note-text strong {
-      color: #B04B3B;
-      font-style: normal;
-    }
-  
-    .donation-message {
-      font-family: 'Raleway', sans-serif;
-      color: #444;
-      text-align: center;
-      line-height: 1.6;
-    }
-  
-    .donation-line {
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      margin-bottom: 6px;
-    }
-  
-    .highlight-text {
-      color: #B04B3B;
-      font-weight: 700;
-    }
-  
-    .contributors-count {
-      display: inline-block;
-      background: rgba(176, 75, 59, 0.08);
-      border-radius: 30px;
-      padding: 6px 22px;
-      margin: 12px auto;
-      border: 1px solid rgba(176, 75, 59, 0.15);
-      box-shadow: 0 2px 6px rgba(176, 75, 59, 0.08);
-      transition: all 0.3s ease-in-out;
-    }
-  
-    .contributors-count:hover {
-      background: rgba(176, 75, 59, 0.12);
-      transform: translateY(-2px);
-    }
-  
-    .contributors-text {
-      font-size: 1rem;
-      letter-spacing: 0.3px;
-      color: #333;
-      font-weight: 500;
-    }
-  
-    .contributor-number {
-      color: #B04B3B;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-  
-    @media (max-width: 768px) {
-      .uniquegoal-heading {
-        font-size: 1.15rem;
-      }
-      .uniquegoal-progress-container {
-        height: 22px;
-      }
-      .uniquegoal-progress-text {
-        font-size: 0.85rem;
-      }
-    }
-  
-    @media (max-width: 576px) {
-      .uniquegoal-progress-container {
-        height: 20px;
-      }
-      .uniquegoal-progress-text {
-        font-size: 0.8rem;
-      }
-      .donation-line {
-        font-size: 0.95rem;
-      }
-    }
-  </style>
-  
+        <section id="about-season" class="about-season section" style="padding: 50px 0;">
+            <div class="container">
+                <div class="row align-items-center gy-4">
+                    <div class="col-lg-6">
+                        <div class="about-season-content">
+                            <h4 class="mb-4 fw-bold" style="color:#b04b34;">
+                                One community. One purpose. Year-round impact.
+                            </h4>
 
+                            <p class="fs-5">
+                                Annual Giving is how the IIT Kanpur community comes together. Alumni, faculty, friends, and well-wishers to strengthen the Institute we all believe in. Every contribution supports students, empowers faculty, and advances the ideas and innovations that define IIT Kanpur.
+
+                              
+                              
+                            </p>
+                            <p class="fs-5">
+                                Last year marked a bold step towards strengthening IIT Kanpur's global impact. This progress is made possible by the commitment and support of the IITK community.
+                            </p>
+                            <p class="fs-5">
+                                 
+                                When you give annually, you don't just support a cause you sustain momentum. With each gift, you become an active partner in shaping the Institute's future and carrying its legacy forward.
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 position-relative">
+                        <div class="about-season-image-wrapper position-relative text-center">
+                            <div class="uniquegoal-section mt-5 p-5 shadow-lg rounded-4">
+                    
+                                <h5 class="fw-bold mb-2 uniquegoal-heading">
+                                    From Vision to Impact:<br> Together, We Make It Happen
+                                </h5>
+                    
+                                <p class="timeline-text mb-4">(<strong>by March 2026</strong>)</p>
+                    
+                                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                                    
+                                    <div class="text-start">
+                                        <p class="fw-semibold mb-0 text-muted small">Raised So Far</p>
+                                        <h6 class="fw-bold">
+                                            ₹ <span 
+                                            id="uniquegoal-raised"
+                                            data-raised="<?php echo total_donations($Purpose, 90, '2025-26'); ?>">
+                                            <?php echo total_donations($Purpose, 90, '2025-26'); ?>
+                                        </span>
+
+                                        </h6>
+                                    </div>
+                    
+                                    <div class="text-end">
+                                        <p class="fw-semibold mb-0 text-muted small">Goal</p>
+                                        <h6 class="fw-bold">
+                                            ₹ <span 
+    id="uniquegoal-goal"
+    data-goal="50000000"
+>
+    5,00,00,000
+</span>
+
+                                        </h6>
+                                    </div>
+                    
+                                </div>
+                    
+                                <div class="uniquegoal-progress-container mb-3">
+                                    <div class="uniquegoal-progress-fill" id="uniquegoal-fill">
+                                        <span class="uniquegoal-progress-text" id="uniquegoal-percent">0%</span>
+                                    </div>
+                                </div>
+                                
+                    
+                                <div class="contributors-count text-center my-3">
+                                    <p class="contributors-text mb-0">
+                                        <span class="contributor-number">
+                                            <?php echo donor_count($Purpose, '2025-26'); ?></span> Contributors
+                                    </p>
+                                </div>
+                    
+                                <div class="donation-message mt-3 mb-2">
+                                    <p class="donation-line">
+                                        <span class="highlight-text">Your gift</span> moves the bar towards our
+                                        <span class="highlight-text">vision.</span>
+                                    </p>
+                                    <p class="donation-subline">
+                                        Each donation will support the urgent needs of students and faculty,
+                                        and strengthen IIT Kanpur's legacy.
+                                    </p>
+                                </div>
+                    
+                                <p class="note-text mt-3 mb-0">
+                                    <strong>Note (Outside India): </strong> Online donations reflect within 5–7 working days;
+                                    cheque donations may take up to 30 days.
+                                </p>
+                    
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+           <style>
+            /* ===============================
+   UNIQUE GOAL SECTION
+================================ */
+
+.uniquegoal-section {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    font-family: 'Raleway', sans-serif;
+    transition: all 0.4s ease;
+    text-align: center;
+}
+
+.uniquegoal-section:hover {
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+/* ===============================
+   HEADINGS
+================================ */
+
+.uniquegoal-heading {
+    color: #B04B3B;
+    font-size: 1.4rem;
+    letter-spacing: 0.6px;
+    line-height: 1.4;
+}
+
+.timeline-text {
+    font-size: 0.9rem;
+    color: #B04B34;
+    font-style: italic;
+}
+
+/* ===============================
+   PROGRESS BAR
+================================ */
+
+.uniquegoal-progress-container {
+    width: 100%;
+    height: 26px;
+    border-radius: 50px;
+    background-color: #f6f6f6;
+    position: relative;
+    overflow: hidden;
+}
+
+.uniquegoal-progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #7A291F, #9C3F32, #B04B3B);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: width 0.8s ease-in-out;
+}
+
+/* 🔥 FIXED PERCENT TEXT - Now visible on all backgrounds */
+.uniquegoal-progress-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #333;
+    pointer-events: none;
+    z-index: 10;
+    text-shadow: 
+        0 0 3px rgba(255, 255, 255, 0.9),
+        0 0 5px rgba(255, 255, 255, 0.7),
+        0 0 7px rgba(255, 255, 255, 0.5);
+    min-width: 40px;
+    text-align: center;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(2px);
+}
+
+/* When progress is high, change text color to white for better contrast */
+.uniquegoal-progress-container .uniquegoal-progress-text.high-progress {
+    color: #fff;
+    text-shadow: 
+        0 0 3px rgba(0, 0, 0, 0.9),
+        0 0 5px rgba(0, 0, 0, 0.7),
+        0 0 7px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* ===============================
+   AMOUNT TEXT
+================================ */
+
+.inr-text {
+    font-size: 0.9rem;
+    color: #B04B3B;
+    font-weight: 600;
+}
+
+/* ===============================
+   NOTE BOX
+================================ */
+
+.note-text {
+    background: rgba(176, 75, 59, 0.08);
+    border-left: 4px solid #B04B3B;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #444;
+    font-style: italic;
+    text-align: left;
+}
+
+.note-text strong {
+    color: #B04B3B;
+    font-style: normal;
+}
+
+/* ===============================
+   DONATION MESSAGE
+================================ */
+
+.donation-message {
+    font-family: 'Raleway', sans-serif;
+    color: #444;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.donation-line {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    margin-bottom: 6px;
+}
+
+.highlight-text {
+    color: #B04B3B;
+    font-weight: 700;
+}
+
+/* ===============================
+   CONTRIBUTORS COUNT
+================================ */
+
+.contributors-count {
+    display: inline-block;
+    background: rgba(176, 75, 59, 0.08);
+    border-radius: 30px;
+    padding: 6px 22px;
+    margin: 12px auto;
+    border: 1px solid rgba(176, 75, 59, 0.15);
+    box-shadow: 0 2px 6px rgba(176, 75, 59, 0.08);
+    transition: all 0.3s ease-in-out;
+}
+
+.contributors-count:hover {
+    background: rgba(176, 75, 59, 0.12);
+    transform: translateY(-2px);
+}
+
+.contributors-text {
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+    color: #333;
+    font-weight: 500;
+}
+
+.contributor-number {
+    color: #B04B3B;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+    .uniquegoal-heading {
+        font-size: 1.15rem;
+    }
+
+    .uniquegoal-progress-container {
+        height: 22px;
+    }
+
+    .uniquegoal-progress-text {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .uniquegoal-progress-container {
+        height: 20px;
+    }
+
+    .uniquegoal-progress-text {
+        font-size: 0.8rem;
+    }
+
+    .donation-line {
+        font-size: 0.95rem;
+    }
+}
+
+           </style>
+        </section>
 
         <!-- Impact Section -->
         <section id="contribution" class="py-5 full-width-bg bg-light">
@@ -3560,6 +3479,120 @@
             updateDonationDisplay();
         }
 
+        // Form Validation Function - ADDED VALIDATION CODE
+        function validateForm() {
+            // Get affiliation value
+            const affiliationSelected = document.querySelector('.affiliation-dropdown .dropdown-selected');
+            const affiliationValue = affiliationSelected.getAttribute('data-value') || affiliationSelected.textContent;
+
+            // Check if affiliation is selected
+            if (!affiliationValue || affiliationValue === "Affiliation *") {
+                alert('Please select your affiliation (Alumni/Non-Alumni/Organization)');
+                return false;
+            }
+
+            // If alumni is selected, validate program and YOG
+            if (affiliationValue === "alumni") {
+                const programSelected = document.querySelector('.program-dropdown .dropdown-selected');
+                const programValue = programSelected.getAttribute('data-value') || programSelected.textContent;
+                
+                const yogSelected = document.querySelector('.yog-dropdown .dropdown-selected');
+                const yogValue = yogSelected.getAttribute('data-value') || yogSelected.textContent;
+                
+                if (!programValue || programValue === "Select Program *") {
+                    alert('Please select your program');
+                    return false;
+                }
+                
+                if (!yogValue || yogValue === "Year of Graduation *") {
+                    alert('Please select your year of graduation');
+                    return false;
+                }
+            }
+
+            // Basic field validations
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            if (!name || name.trim() === '') {
+                alert('Please enter your full name');
+                return false;
+            }
+
+            if (!email || email.trim() === '') {
+                alert('Please enter your email');
+                return false;
+            }
+
+            // Simple email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return false;
+            }
+
+            if (!phone || phone.trim() === '') {
+                alert('Please enter your mobile number');
+                return false;
+            }
+
+            // Phone number validation (10 digits)
+            const phoneRegex = /^[0-9]{10}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('Please enter a valid 10-digit mobile number');
+                return false;
+            }
+
+            // PAN validation (optional but must be valid if entered)
+            const panInput = document.getElementById('panInput');
+            const pan = panInput.value.trim().toUpperCase();
+            const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+
+            if (pan !== "" && !panRegex.test(pan)) {
+                alert("Invalid PAN number.\nFormat: ABCDE1234F");
+                panInput.focus();
+                return false;
+            }
+
+            // Donation amount validation
+            const donationAmount = getSelectedAmount();
+            if (!donationAmount || donationAmount <= 0) {
+                alert('Please select a valid donation amount');
+                return false;
+            }
+
+            // Check if donation amount is not greater than 5 lakhs
+            if (parseInt(donationAmount) > 500000) {
+                alert('Amount should not be greater than 5 Lakhs');
+                return false;
+            }
+
+            // Set hidden form values
+            document.getElementById("amount").value = donationAmount;
+            document.getElementById("donationtime").value = getSelectedType();
+            document.getElementById("countryInput").value = "India";
+            document.getElementById("currency").value = "inr";
+            document.getElementById("select_category").value = affiliationValue;
+
+            // Set program and YOG values if alumni
+            if (affiliationValue === "alumni") {
+                const programSelected = document.querySelector('.program-dropdown .dropdown-selected');
+                const programValue = programSelected.getAttribute('data-value') || programSelected.textContent;
+                
+                const yogSelected = document.querySelector('.yog-dropdown .dropdown-selected');
+                const yogValue = yogSelected.getAttribute('data-value') || yogSelected.textContent;
+                
+                document.getElementById("program").value = programValue;
+                document.getElementById("Year_of_Graduation").value = yogValue;
+            } else {
+                document.getElementById("program").value = "";
+                document.getElementById("Year_of_Graduation").value = "";
+            }
+
+            return true;
+        }
+
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
             // Initialize progress bar animation
@@ -3744,37 +3777,6 @@
                 }
             });
 
-            // Form submission handling (India only)
-            document.getElementById('donationForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-                
-                // Only allow form submission for India
-                if (selectedCountry !== 'india') {
-                    alert('Please use the payment options for your country from the previous step.');
-                    return;
-                }
-
-                // Collect form data
-                const formData = new FormData(this);
-
-                // Get donation amount
-                let donationAmount = getSelectedAmount();
-                if (!donationAmount) {
-                    alert('Please select a donation amount');
-                    return;
-                }
-
-                // Add donation data
-                formData.append('amount', donationAmount);
-                formData.append('type', getSelectedType());
-
-                // Here you would typically submit to your backend
-                console.log('Form data:', Object.fromEntries(formData));
-
-                alert('Proceeding with Indian payment gateway...');
-                // In real implementation, submit form to server
-            });
-
             // Initialize Year of Graduation dropdown
             const yogDropdown = document.querySelector('.yog-dropdown');
             if (yogDropdown) {
@@ -3871,6 +3873,67 @@
             }
         });
     </script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const fill = document.getElementById("uniquegoal-fill");
+    const percentText = document.getElementById("uniquegoal-percent");
+
+    const raisedEl = document.getElementById("uniquegoal-raised");
+    const goalEl = document.getElementById("uniquegoal-goal");
+
+    // ✅ Safely fetch numbers
+    const raisedAmount = Number(
+        raisedEl.dataset.raised.replace(/,/g, '')
+    ) || 0;
+
+    const goalAmount = Number(
+        goalEl.dataset.goal.replace(/,/g, '')
+    ) || 1; // prevent divide by zero
+
+    // Display formatted numbers
+   // ✅ Format Raised Amount in Crores
+if (raisedAmount >= 10000000) {
+    raisedEl.textContent = (raisedAmount / 10000000).toFixed(2) + " Cr";
+} else {
+    raisedEl.textContent = raisedAmount.toLocaleString('en-IN');
+}
+
+// ✅ Format Goal Amount in Crores
+if (goalAmount >= 10000000) {
+    goalEl.textContent = (goalAmount / 10000000).toFixed(2) + " Cr";
+} else {
+    goalEl.textContent = goalAmount.toLocaleString('en-IN');
+}
+
+
+    // ✅ EXACT percentage formula
+    const percent = Math.min(
+        Math.round((raisedAmount / goalAmount) * 100),
+        100
+    );
+
+    let current = 0;
+    const speed = 20;
+
+    const animate = setInterval(() => {
+        if (current >= percent) {
+            clearInterval(animate);
+        } else {
+            current++;
+            fill.style.width = current + "%";
+            percentText.textContent = current + "%";
+
+            if (current >= 50) {
+                percentText.classList.add('high-progress');
+            }
+        }
+    }, speed);
+
+});
+</script>
 </body>
 
 </html>
